@@ -1,6 +1,6 @@
 {
   "name": "travelyo-react-shared-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shared components for travelyo packages",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
@@ -22,6 +22,7 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.1",
+    "@svgr/cli": "^8.0.1",
     "@types/react": "^18.2.13",
     "react": "^18.2.0",
     "rollup": "^3.25.1",
@@ -35,5 +36,8 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@react-google-maps/api": "^2.18.1"
+  }
 }
