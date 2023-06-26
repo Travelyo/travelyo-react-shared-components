@@ -113,5 +113,6 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
-  }
+  },
+  "exclude": ["node_modules", "dist", ".storybook", "**/*.stories.tsx", "**/*.stories.ts"]
 }
