@@ -1,55 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, Polyline, LoadScriptProps } from '@react-google-maps/api'
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Marker from './Marker'
-import Panel from './Panel'
 import './Map.scss';
 import HotelMarker from './Markers/HotelMarker';
 import PoiPanel from './PoiPanel';
 import HotelPanel from './HotelPanel';
 
 export type MapProps = {
+  apiKey: string,
   center: CoordinateProps,
   zoom?: number,
   options?: {}
-  poiList?: []
+  poiList?: PoiProps[],
 }
+
+export interface PoiProps {
+  description: string,
+  distance: {
+    unit: string,
+    value: string,
+  },
+  latitude: string,
+  longitude: string,
+  mode: string,
+  order_value: number,
+  poi: {
+    airport_code?: any,
+    name: string,
+    type: number,
+  },
+  time: {
+    hours: number,
+    minutes: number,
+  },
+  type: string,
+} 
 
 type CoordinateProps = {
   lat: number,
   lng: number
 }
 
-const poi =  {
-  "order_value": 4,
-  "poi": {
-    "name": "Hungarian National Museum",
-    "type": 3,
-    "airport_code": null,
-  },
-  "position": {
-    "lat": 47.4901,
-    "lng": 19.0629,
-  },
-  "type": "walk",
-  "mode": "time",
-  "time": {
-    "hours": 0,
-    "minutes": 4
-  },
-  "distance": {
-    "unit": "m",
-    "value": "300"
-  }
-}
-
 const mapContainerStyle = {
   width: '100%',
-  height: 'calc(100vh - 60px)',
+  height: '100%',
 };
 
 const googleApiLibraries: LoadScriptProps['libraries'] = ['places', 'geometry'];
 
 const Map = ({
+  apiKey,
   options,
   center,
   poiList,
@@ -66,63 +67,78 @@ const Map = ({
         featureType: 'poi',
         stylers: [{ visibility: 'off' }],
       },
+      {
+        featureType: 'transit',
+        elementType: 'all',
+        stylers: [
+          { visibility: 'off' },
+        ],
+      },
     ],
     ...options,
   }
+  const panelsRef = useRef<HTMLDivElement>(null);
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDfeB3SUVFKDL7kdwyEvM8pAqDrhtSRR-c',
+    googleMapsApiKey: apiKey,
     libraries: googleApiLibraries,
   });
-  const [hoveredMarker, setHoveredMarker] = useState<CoordinateProps | null>(null);
-  const [activeMarker, setActiveMarker] = useState<CoordinateProps | null>(null);
+  const [hoveredPoi, setHoveredPoi] = useState<PoiProps | null>(null);
+  const [activePoi, setActivePoi] = useState<PoiProps | null>(null);
 
-  useEffect(() => {
-    console.log(activeMarker)
-  }, [activeMarker])
-  
+  const formattedPois = poiList && poiList.map((poi: PoiProps) => ({
+    ...poi,
+    latitude: parseFloat(poi.latitude),
+    longitude: parseFloat(poi.longitude),
+  }))
+
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
 
   return (
-    <div style={{
-      position: 'relative',
-      height: 'calc(100vh - 60px)',
-      width: 'calc(100vw - 60px)',
-      borderRadius: '20px',
-      overflow: 'hidden',
-    }}>
+    <div className="tsc-map-wrapper">
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
         zoom={zoom}
         center={center}
         options={mapOptions}
-        onClick={() => setActiveMarker(null)}
+        onClick={() => setActivePoi(null)}
       >
         <HotelMarker position={center} />
-        {poiList && poiList.map((poi: any, index: number) => (
+        {formattedPois && formattedPois.map((poi: any, index: number) => (
           <Marker
             key={index}
-            position={poi.position}
+            poi={poi}
             hotelPosition={center}
-            onHover={setHoveredMarker}
-            onClick={setActiveMarker}
-            type={poi.type}
+            onHover={setHoveredPoi}
+            onClick={setActivePoi}
           />
         ))}
-        {hoveredMarker && (
+        {hoveredPoi && (
           <Polyline
-            path={[center, hoveredMarker]}
+            path={[center, { lat: hoveredPoi.latitude, lng: hoveredPoi.longitude }]}
             options={{
               strokeColor: '#363F49',
               strokeOpacity: 1,
               strokeWeight: 3,
             }}
-            visible={hoveredMarker !== null}
+            visible={hoveredPoi !== null}
           />
         )}
-        {activeMarker && <PoiPanel />}
-        <HotelPanel />
+        {/* {activePoi && <PoiPanel poi={activePoi} />}
+        <HotelPanel /> */}
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={activePoi ? 'poi' : 'hotel'}
+            nodeRef={panelsRef}
+            classNames="fade"
+            timeout={150}
+          >
+            <div ref={panelsRef}>
+              {activePoi ? <PoiPanel poi={activePoi} /> : <HotelPanel />}
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
       </GoogleMap>
 
       <div style={{

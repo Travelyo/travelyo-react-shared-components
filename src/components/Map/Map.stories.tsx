@@ -14,35 +14,160 @@ type Story = StoryObj<typeof Map>;
 
 export const Primary: Story = {
   args: {
+    apiKey: 'AIzaSyDfeB3SUVFKDL7kdwyEvM8pAqDrhtSRR-c',
     center: {
-      lat: 48.6215424157835,
-      lng: 22.292041851385854
+      lat: 51.516098,
+      lng: -0.171982
     },
     zoom: 11,
-    poiList: [{
-      type: 1,
-      position: {
-        lat: 48.62982264135909,
-        lng: 22.25994858925517
+    poiList: [
+      {
+          "order_value": 14,
+          "poi": {
+              "name": "Kensington Gardens",
+              "type": 1,
+              "airport_code": null
+          },
+          "type": "walk",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 14
+          },
+          "distance": {
+              "unit": "km",
+              "value": "1.2"
+          },
+          "description": "Serene royal park with picturesque landscapes and Kensington Palace.",
+          "latitude": "51.50692",
+          "longitude": "-0.17857"
+      },
+      {
+          "order_value": 17,
+          "poi": {
+              "name": "Hyde Park",
+              "type": 1,
+              "airport_code": null
+          },
+          "type": "walk",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 17
+          },
+          "distance": {
+              "unit": "km",
+              "value": "1.4"
+          },
+          "description": "Vast green park with Serpentine Lake, famous Speakers\u0027 Corner, and recreational activities.",
+          "latitude": "51.50663",
+          "longitude": "-0.16401"
+      },
+      {
+          "order_value": 19,
+          "poi": {
+              "name": "Madame Tussauds",
+              "type": 3,
+              "airport_code": null
+          },
+          "type": "walk",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 19
+          },
+          "distance": {
+              "unit": "km",
+              "value": "1.4"
+          },
+          "description": "World-famous wax museum featuring lifelike celebrity figures and interactive exhibits.",
+          "latitude": "51.52308",
+          "longitude": "-0.1591"
+      },
+      {
+          "order_value": 23,
+          "poi": {
+              "name": "Kensington Palace",
+              "type": 1,
+              "airport_code": null
+          },
+          "type": "walk",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 23
+          },
+          "distance": {
+              "unit": "km",
+              "value": "1.9"
+          },
+          "description": "Stately home, former residence of Princess Diana, beautiful gardens.",
+          "latitude": "51.50514",
+          "longitude": "-0.18867"
+      },
+      {
+          "order_value": 40,
+          "poi": {
+              "name": "(LHR) Heathrow Airport",
+              "type": 7,
+              "airport_code": "LHR"
+          },
+          "type": "drive",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 40
+          },
+          "distance": {
+              "unit": "km",
+              "value": "27.4"
+          },
+          "description": "The UK\u0027s largest international airport, located 24 km west of London city centre.",
+          "latitude": "51.47002",
+          "longitude": "-0.45429"
+      },
+      {
+          "order_value": 81,
+          "poi": {
+              "name": " (LGW) London Gatwick Airport ",
+              "type": 7,
+              "airport_code": "LGW "
+          },
+          "type": "drive",
+          "mode": "time",
+          "time": {
+              "hours": 1,
+              "minutes": 20
+          },
+          "distance": {
+              "unit": "km",
+              "value": "92.9"
+          },
+          "description": "Major international airport located south of London.",
+          "latitude": "51.15374",
+          "longitude": "-0.18161"
+      },
+      {
+          "order_value": 55,
+          "poi": {
+              "name": "(LTN) London Luton Airport ",
+              "type": 7,
+              "airport_code": "LTN"
+          },
+          "type": "drive",
+          "mode": "time",
+          "time": {
+              "hours": 0,
+              "minutes": 55
+          },
+          "distance": {
+              "unit": "km",
+              "value": "52.9"
+          },
+          "description": "International airport serving London and surrounding areas.",
+          "latitude": "51.87966",
+          "longitude": "-0.37487"
       }
-    }, {
-      type: 2,
-      position: {
-        lat: 48.627921023635444,
-        lng: 22.316329382470336
-      }
-    }, {
-      type: 3,
-      position: {
-        lat: 48.5905680745428,
-        lng: 22.260682149077088
-      }
-    }, {
-      type: 4,
-      position: {
-        lat: 48.59459176256031,
-        lng: 22.324982493054787
-      }
-    }]
+    ]
   }
 }

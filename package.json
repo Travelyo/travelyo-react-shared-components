@@ -36,6 +36,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@svgr/cli": "^8.0.1",
     "@types/react": "^18.2.13",
+    "@types/react-transition-group": "^4.4.6",
     "css-loader": "^6.8.1",
     "node-sass": "^9.0.0",
     "prop-types": "^15.8.1",
@@ -62,6 +63,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
-    "react-inlinesvg": "^3.0.2"
+    "react-inlinesvg": "^3.0.2",
+    "react-transition-group": "^4.4.5"
   }
 }

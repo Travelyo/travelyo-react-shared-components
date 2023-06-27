@@ -1,12 +1,16 @@
 import React from 'react'
 import Panel from './Panel'
+import { PoiProps } from './Map'
+import { getDistanceLabel } from '../../services/mapService'
 
 interface PoiPanelProps {
   image?: string,
+  poi: PoiProps,
 }
 
 const PoiPanel = ({
-  image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzLmrm0yxmDac2zSg8y0RDd-NT11kHgY3IQ&usqp=CAU',
+  image,
+  poi
 }: PoiPanelProps) => {
   return (
     <Panel position="bottom">
@@ -14,9 +18,9 @@ const PoiPanel = ({
         <img src={image} alt="" className="tsc-poi-image" />
       )}
       <div className="tsc-poi-content">
-        <div className="tsc-poi-content__title">Posidonio Music Hall</div>
-        <div className="tsc-poi-content__text">Dynamic music venue hosting diverse live performances and events.</div>
-        <div className="tsc-poi-content__distance">30 minutes (2km)</div>
+        <div className="tsc-poi-content__title">{poi.poi.name}</div>
+        <div className="tsc-poi-content__text">{poi.description}</div>
+        <div className="tsc-poi-content__distance">{getDistanceLabel(poi.time)} ({poi.distance.value}{poi.distance.unit})</div>
       </div>
     </Panel>
   )

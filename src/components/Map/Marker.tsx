@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { Circle, Marker as GoogleMarker, OverlayView, OverlayViewF } from '@react-google-maps/api';
+import React, { MouseEvent, useMemo, useState } from 'react';
+import { Marker as GoogleMarker, OverlayView, OverlayViewF } from '@react-google-maps/api';
 import SVG from 'react-inlinesvg';
+import { PoiProps } from './Map';
+import { getDistanceLabel } from '../../services/mapService';
 
 interface MarkerProps {
-  type: string,
   hotelPosition: google.maps.LatLngLiteral,
-  position: {
-    lat: number,
-    lng: number,
-  },
+  poi: PoiProps,
   onHover?: (
     position: {
       lat: number,
@@ -18,17 +16,29 @@ interface MarkerProps {
 }
 
 const Marker = ({
-  position,
   hotelPosition,
-  type,
+  poi,
   onHover = () => {},
   onClick = () => {},
 }: MarkerProps) => {
   const [isHovering, setIsHovering] = useState(false);
+  const {
+    latitude,
+    longitude,
+    time,
+    poi: {
+      type,
+      name,
+    }
+  } = poi;
+  const position = useMemo(() => ({
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude),
+  }), [latitude, longitude])
   const iconUrl = `https://d16tr0byigrcd.cloudfront.net/hf-dev/images/hfmap/map-${type}.svg`;
 
   const onMarkerHover = () => {
-    onHover(position)
+    onHover(poi)
     setIsHovering(true)
   }
 
@@ -37,8 +47,8 @@ const Marker = ({
     setIsHovering(false)
   }
 
-  const onMarkerClick = (event) => {
-    onClick(position)
+  const onMarkerClick = (event: MouseEvent) => {
+    onClick(poi)
     event.stopPropagation()
   }
 
@@ -66,20 +76,9 @@ const Marker = ({
         <div 
           onMouseOver={onMarkerHover}
           onMouseOut={onMarkerHoverOut}
-          className={`overlay-view-marker ${type === 'hotel' && 'marker-hotel'}`}
+          className="overlay-view-marker"
           onClick={onMarkerClick}
         >
-          {type === 'hotel' && (
-            <Circle
-              center={position}
-              radius={500}
-              options={{
-                fillColor: '#000',
-                fillOpacity: 0.15,
-                strokeOpacity: 0,
-              }}
-            />
-          )}
           <SVG src={iconUrl} className="tsc-map-pin-icon" />
         </div>
       </OverlayViewF>
@@ -88,11 +87,11 @@ const Marker = ({
         {isHovering && (
           <div>
             <div className="tsc-map-label">
-              OverlayView label
+              {name}
             </div>
             <OverlayViewF position={getMidPoint(hotelPosition, position)} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
               <div className="tsc-map-tooltip">
-                <span>9 minutes</span>
+                <span>{getDistanceLabel(time)}</span>
               </div>
             </OverlayViewF>
           </div>
