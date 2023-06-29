@@ -6,13 +6,15 @@ import './Map.scss';
 import HotelMarker from './Markers/HotelMarker';
 import PoiPanel from './PoiPanel';
 import HotelPanel from './HotelPanel';
+import { HotelPanelProps } from '../../interfaces/interfaces';
 
 export type MapProps = {
   apiKey: string,
   center: CoordinateProps,
   zoom?: number,
-  options?: {}
+  options?: {},
   poiList?: PoiProps[],
+  hotel: HotelPanelProps,
 }
 
 export interface PoiProps {
@@ -55,6 +57,7 @@ const Map = ({
   center,
   poiList,
   zoom,
+  hotel,
 }: MapProps) => {
   const mapOptions = {
     streetViewControl: false,
@@ -195,7 +198,7 @@ const Map = ({
             timeout={150}
           >
             <div ref={panelsRef}>
-              {activePoi ? <PoiPanel poi={activePoi} /> : <HotelPanel />}
+              {activePoi ? <PoiPanel poi={activePoi} /> : <HotelPanel hotel={hotel} />}
             </div>
           </CSSTransition>
         </SwitchTransition>

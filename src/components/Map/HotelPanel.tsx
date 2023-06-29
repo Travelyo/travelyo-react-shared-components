@@ -2,24 +2,21 @@ import React, { useRef, useState } from 'react'
 import Panel from './Panel'
 import { CSSTransition } from 'react-transition-group'
 import { ArrowDown, StarIcon } from '../icons';
+import { HotelPanelProps } from '../../interfaces/interfaces';
 
 interface Props {
-  name: string;
-  address: string;
-  description?: string;
-  rating: number;
-  googleMapsLink?: string;
-  hotelWebsiteLink?: string;
+  hotel: HotelPanelProps;
 }
 
-const HotelPanel = ({
-  name,
-  address,
-  description,
-  rating,
-  googleMapsLink,
-  hotelWebsiteLink,
-}: Props) => {
+const HotelPanel = ({ hotel }: Props) => {
+  const {
+    name,
+    address,
+    description,
+    rating,
+    googleMapsLink,
+    hotelWebsiteLink,
+  } = hotel;
   const hotelInfoRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
 
