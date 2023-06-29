@@ -97,7 +97,6 @@ const Marker = ({
           </div>
         )}
       </OverlayViewF>
-     
     </GoogleMarker>
   )
 }

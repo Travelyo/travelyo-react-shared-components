@@ -1,5 +1,3 @@
-// Button.stories.ts|tsx
-
 import type { Meta, StoryObj } from '@storybook/react';
 import './Map.scss';
 
@@ -7,6 +5,13 @@ import Map from './Map';
 
 const meta: Meta<typeof Map> = {
   component: Map,
+  decorators: [
+    (Story) => (
+      <div style={{ height: 'calc(100vh - 60px)', width: '100%' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;

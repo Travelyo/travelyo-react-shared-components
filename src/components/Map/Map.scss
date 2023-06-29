@@ -119,6 +119,11 @@
 .tsc-hotel-panel {
   padding: 20px;
 
+  &__rating {
+    display: flex;
+    gap: 2px;
+  }
+
   &__name {
     font-size: 16px;
     font-family: Poppins;
@@ -175,6 +180,11 @@
   &__toggle {
     text-align: center;
     cursor: pointer;
+    transition: 150ms;
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
   }
 }
 
