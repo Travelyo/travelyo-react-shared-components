@@ -101,21 +101,32 @@
 }
 
 .tsc-map-panel {
+  padding: 20px;
   position: absolute;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
-  background-color: white;
   width: 280px;
-  border-radius: 16px;
+
+  &__content {
+    background-color: white;
+    border-radius: 16px;
+  }
 
   &--top {
-    left: 20px;
-    top: 20px;
+    left: 0;
+    top: 0;
   }
 
   &--bottom {
-    bottom: 20px;
-    left: 20px;
+    bottom: 0;
+    left: 0;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    top: unset;
   }
 }
 

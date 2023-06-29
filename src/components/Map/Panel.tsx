@@ -13,7 +13,9 @@ const Panel = ({
 
   return (
     <div className={`tsc-map-panel tsc-map-panel--${position}`}>
-      {children}
+      <div className="tsc-map-panel__content">
+        {children}
+      </div>
     </div>
   )
 };
