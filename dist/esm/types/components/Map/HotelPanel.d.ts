@@ -1,11 +1,7 @@
 import React from 'react';
+import { HotelPanelProps } from '../../interfaces/interfaces';
 interface Props {
-    name: string;
-    address: string;
-    description?: string;
-    rating: number;
-    googleMapsLink?: string;
-    hotelWebsiteLink?: string;
+    hotel: HotelPanelProps;
 }
-declare const HotelPanel: ({ name, address, description, rating, googleMapsLink, hotelWebsiteLink, }: Props) => React.JSX.Element;
+declare const HotelPanel: ({ hotel }: Props) => React.JSX.Element;
 export default HotelPanel;
