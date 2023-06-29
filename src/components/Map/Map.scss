@@ -109,11 +109,11 @@
   position: absolute;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
-  width: 280px;
 
   &__content {
     background-color: white;
     border-radius: 16px;
+    width: 280px;
   }
 
   &--top {
