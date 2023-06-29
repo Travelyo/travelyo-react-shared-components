@@ -17,6 +17,7 @@ const HotelPanel = ({ hotel }: Props) => {
     googleMapsLink,
     hotelWebsiteLink,
   } = hotel;
+  console.log(hotel)
   const hotelInfoRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
 
