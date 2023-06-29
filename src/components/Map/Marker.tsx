@@ -3,6 +3,7 @@ import { Marker as GoogleMarker, OverlayView, OverlayViewF } from '@react-google
 import SVG from 'react-inlinesvg';
 import { PoiProps } from './Map';
 import { getDistanceLabel } from '../../services/mapService';
+import { CarIcon, WalkIcon } from '../icons';
 
 interface MarkerProps {
   hotelPosition: google.maps.LatLngLiteral,
@@ -91,6 +92,11 @@ const Marker = ({
             </div>
             <OverlayViewF position={getMidPoint(hotelPosition, position)} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
               <div className="tsc-map-tooltip">
+                {poi.type === 'walk' ? (
+                  <WalkIcon size={16} fill="#ffffff" />
+                ) : (
+                  <CarIcon size={16} fill="#ffffff" />
+                )}
                 <span>{getDistanceLabel(time)}</span>
               </div>
             </OverlayViewF>
