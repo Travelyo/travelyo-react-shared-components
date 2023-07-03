@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Panel from './Panel'
 import { CSSTransition } from 'react-transition-group'
-import { ArrowDown, StarIcon } from '../icons';
+import { ArrowDown, LinkIcon, PinIcon, StarIcon } from '../icons';
 import { HotelPanelProps } from '../../interfaces/interfaces';
 
 interface Props {
@@ -47,10 +47,22 @@ const HotelPanel = ({ hotel }: Props) => {
             <div className="tsc-hotel-panel__description">
               {description}
             </div>
-            <div className="tsc-hotel-panel__buttons">
-              <button className="tsc-hotel-panel__button">Hotel Website</button>
-              <button className="tsc-hotel-panel__button">View on Google Maps</button>
-            </div>
+            {(hotelWebsiteLink || googleMapsLink) && (
+              <div className="tsc-hotel-panel__buttons">
+                {hotelWebsiteLink && (
+                  <a href={hotelWebsiteLink} target="_blank" className="tsc-hotel-panel__button">
+                    <LinkIcon />
+                    <span>Hotel Website</span>
+                  </a>
+                )}
+                {googleMapsLink && (
+                  <a href={googleMapsLink} target="_blank" className="tsc-hotel-panel__button">
+                    <PinIcon />
+                    <span>View on Google Maps</span>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </CSSTransition>
 
