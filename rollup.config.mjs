@@ -48,6 +48,7 @@ export default [
         extensions: ['.css', '.scss'],
         minimize: true,
         extract: true,
+        parser: 'postcss-scss',
       }),
     ],
   },
