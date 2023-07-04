@@ -4,8 +4,10 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import babel from '@rollup/plugin-babel';
 
 const packageJson = require('./package.json');
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default [
   {
@@ -27,6 +29,20 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
+      babel({
+        extensions,
+        babelHelpers: 'bundled',
+        presets: [
+          ['@babel/preset-env', {
+            "targets": {
+              "esmodules": true,
+              "ie": "11"
+            },
+            "useBuiltIns": "entry",
+            "corejs": 3
+          }],
+        ],
+      }),
       terser(),
       postcss({
         extensions: ['.css', '.scss'],
