@@ -3,6 +3,7 @@ import Panel from './Panel'
 import { PoiProps } from './Map'
 import { getDistanceLabel } from '../../services/mapService'
 import { CarIcon, WalkIcon } from '../icons'
+import t from '../../services/translatorService'
 
 interface PoiPanelProps {
   image?: string,
@@ -27,7 +28,7 @@ const PoiPanel = ({
           ) : (
             <CarIcon size={16} />
           )}
-          <span>{getDistanceLabel(poi.time)} ({poi.distance.value}{poi.distance.unit})</span>
+          <span>{getDistanceLabel(poi.time)} ({poi.distance.value}{t(`dyn-package.${poi.distance.unit}`)})</span>
         </div>
       </div>
     </Panel>

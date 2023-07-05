@@ -3,6 +3,7 @@ import Panel from './Panel'
 import { CSSTransition } from 'react-transition-group'
 import { ArrowDown, LinkIcon, PinIcon, StarIcon } from '../icons';
 import { HotelPanelProps } from '../../interfaces/interfaces';
+import t from '../../services/translatorService'; 
 
 interface Props {
   hotel: HotelPanelProps;
@@ -52,13 +53,13 @@ const HotelPanel = ({ hotel }: Props) => {
                 {hotelWebsiteLink && (
                   <a href={hotelWebsiteLink} target="_blank" className="tsc-hotel-panel__button">
                     <LinkIcon />
-                    <span>Hotel Website</span>
+                    <span>{t('dyn-package.hotelWebsite')}</span>
                   </a>
                 )}
                 {googleMapsLink && (
                   <a href={googleMapsLink} target="_blank" className="tsc-hotel-panel__button">
                     <PinIcon />
-                    <span>View on Google Maps</span>
+                    <span>{t('dyn-package.showOnMap')}</span>
                   </a>
                 )}
               </div>

@@ -1,6 +1,9 @@
+import t from '../services/translatorService'
+
 export const getDistanceLabel = (time: any) => {
   const { hours, minutes } = time;
-  const hoursLabel = hours > 0 ? `${hours} hours` : '';
-  const minutesLabel = minutes > 0 ? `${minutes} minutes` : '';
-  return `${hoursLabel} ${minutesLabel}`;
+
+  return hours > 0
+    ? t('dyn-package.minutesAndHours', { hours, minutes })
+    : t('dyn-package.minutes', { minutes })
 }

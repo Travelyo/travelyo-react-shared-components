@@ -22,6 +22,7 @@
 
   path {
     transition: 150ms;
+    pointer-events: none;
   }
 
   &:hover {
@@ -39,14 +40,18 @@
   height: 31px;
   width: 26px;
   z-index: 1;
+  cursor: pointer;
 
   &:lang('he') {
     transform: translate(50%, -50%);
   }
 
   &:hover {
+    z-index: 10;
+
     .tsc-map-label {
-      display: block
+      display: block;
+      z-index: 10;
     }
   }
 
@@ -63,7 +68,7 @@
   font-family: 'Poppins', sans-serif;
   transform: translateX(30px) translateY(-10px);
   white-space: nowrap;
-  z-index: 1;
+  z-index: 100;
   position: absolute;
   animation: fadeIn 150ms;
   text-shadow:
@@ -213,6 +218,7 @@
 
     &:hover {
       border: 2px solid #212121;
+      color: #212121;
     }
   }
 
