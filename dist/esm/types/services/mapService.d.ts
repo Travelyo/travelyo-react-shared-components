@@ -1,1 +1,1 @@
-export declare const getDistanceLabel: (time: any) => string;
+export declare const getDistanceLabel: (time: any) => any;
