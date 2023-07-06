@@ -30,7 +30,7 @@ jobs:
         CI: "false"
 
     - name: List assets generated
-      run: find $PWD/dist/ -type f -ls
+      run: find dist/ -type f -ls
 
 
     - name: GIT - Auto-commit
@@ -38,7 +38,7 @@ jobs:
       with:
         commit_message: Add new compiled assets
         file_pattern: dist/
-        add_options: -A
+        add_options: --all
         skip_fetch: true
         skip_checkout: true
       id: auto-commit-action
