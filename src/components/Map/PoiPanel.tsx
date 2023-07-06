@@ -28,7 +28,7 @@ const PoiPanel = ({
           ) : (
             <CarIcon size={16} />
           )}
-          <span>{getDistanceLabel(poi.time)} {t(`dyn-package.${poi.type}`)} ({poi.distance.value} {t(`dyn-package.${poi.distance.unit}`)})</span>
+          <span>{getDistanceLabel(poi.time)} {poi.type ? t(`dyn-package.${poi.type}`) : ''} ({poi.distance.value} {t(`dyn-package.${poi.distance.unit}`)})</span>
         </div>
       </div>
     </Panel>

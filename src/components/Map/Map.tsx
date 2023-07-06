@@ -75,12 +75,6 @@ const Map = ({
   const [hoveredPoi, setHoveredPoi] = useState<PoiProps | null>(null);
   const [activePoi, setActivePoi] = useState<PoiProps | null>(null);
 
-  const formattedPois = poiList && poiList.map((poi: PoiProps) => ({
-    ...poi,
-    latitude: parseFloat(poi.latitude),
-    longitude: parseFloat(poi.longitude),
-  }))
-
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
 
@@ -95,7 +89,7 @@ const Map = ({
         onClick={() => setActivePoi(null)}
       >
         <HotelMarker position={center} />
-        {formattedPois && formattedPois.map((poi: any, index: number) => (
+        {poiList && poiList.map((poi: any, index: number) => (
           <Marker
             key={index}
             poi={poi}
