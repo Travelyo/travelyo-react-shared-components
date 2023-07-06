@@ -9,6 +9,7 @@ const mapConfig = {
   fullscreenControl: false,
   mapTypeControl: false,
   clickableIcons: false,
+  gestureHandling: 'greedy',
   styles: []
 }
 
