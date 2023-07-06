@@ -37,7 +37,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Add new compiled assets
-        file_pattern: dist/**
+        # file_pattern: dist/
         skip_fetch: true
         skip_checkout: true
       id: auto-commit-action
