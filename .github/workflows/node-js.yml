@@ -30,7 +30,21 @@ jobs:
         CI: "false"
 
     - name: List assets generated
-      run: find $PWD/dist/ -ls
+      run: find dist/ -type f -ls
+
+    - name: List assets generated
+      run: git status
+
+
+    - name: GIT - Auto-commit
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Add new compiled assets
+        file_pattern: dist/
+        add_options: --all
+        skip_fetch: true
+        skip_checkout: true
+      id: auto-commit-action
 
     # - name: JS assets deployed
     #   run: echo "${{ steps.list_assets.outputs.js_only }}"
