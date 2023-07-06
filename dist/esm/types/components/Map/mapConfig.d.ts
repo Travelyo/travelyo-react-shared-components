@@ -7,6 +7,7 @@ declare const mapConfig: {
     fullscreenControl: boolean;
     mapTypeControl: boolean;
     clickableIcons: boolean;
+    gestureHandling: string;
     styles: never[];
 };
 export default mapConfig;
