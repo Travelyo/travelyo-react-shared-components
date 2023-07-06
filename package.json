@@ -1,6 +1,6 @@
 {
   "name": "travelyo-react-shared-components",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Shared components for travelyo packages",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
