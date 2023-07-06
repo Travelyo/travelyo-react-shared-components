@@ -1,0 +1,54 @@
+
+name: Build and update assets
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: "18.x"
+        cache: 'npm'
+        cache-dependency-path: package-lock.json
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Build
+      run: npm run rollup
+      env:
+        CI: "false"
+
+    - name: List assets generated
+      run: find $PWD/dist/ -ls
+
+    # - name: JS assets deployed
+    #   run: echo "${{ steps.list_assets.outputs.js_only }}"
+
+    # - uses: act10ns/slack@v1
+    #   with:
+    #     status: ${{ job.status }}
+    #     channel: ${{secrets.SLACK_WEBHOOK_CHANNEL}}
+    #     message: "${{ github.repository }}: ${{ github.head_ref || github.ref_name }}: Artifact deployed ${{ steps.list_assets.outputs.js_only }}"
+    #   env:
+    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    # - uses: act10ns/slack@v1
+    #   with:
+    #     message: "${{ github.repository }}: ${{ github.head_ref || github.ref_name }}: ${{ job.status }}"
+    #     status: ${{ job.status }}
+    #     steps: ${{ toJson(steps) }}
+    #     channel: ${{secrets.SLACK_WEBHOOK_CHANNEL}}
+    #   env:
+    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #   if: failure()
