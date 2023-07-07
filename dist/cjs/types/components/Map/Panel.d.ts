@@ -4,5 +4,5 @@ interface PanelProps {
     className?: string;
     position?: 'top' | 'bottom';
 }
-declare const Panel: ({ children, position, }: PanelProps) => React.JSX.Element;
+declare const Panel: ({ children, position, className, }: PanelProps) => React.JSX.Element;
 export default Panel;
