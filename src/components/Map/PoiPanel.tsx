@@ -15,7 +15,7 @@ const PoiPanel = ({
   poi
 }: PoiPanelProps) => {
   return (
-    <Panel position="bottom">
+    <Panel position="bottom" className="tsc-map-panel__poi">
       {image && (
         <img src={image} alt="" className="tsc-poi-image" />
       )}

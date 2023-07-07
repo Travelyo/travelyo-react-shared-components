@@ -109,8 +109,6 @@ const Map = ({
             visible={hoveredPoi !== null}
           />
         )}
-        {/* {activePoi && <PoiPanel poi={activePoi} />}
-        <HotelPanel /> */}
         <SwitchTransition mode="out-in">
           <CSSTransition
             key={activePoi ? 'poi' : 'hotel'}

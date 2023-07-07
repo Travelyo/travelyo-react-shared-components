@@ -26,7 +26,7 @@ const HotelPanel = ({ hotel }: Props) => {
   ))
 
   return (
-    <Panel position="top">
+    <Panel position="top" className="tsc-map-panel__hotel">
       <div className="tsc-hotel-panel">
         <div className="tsc-hotel-panel__rating">
           {ratingStars}
