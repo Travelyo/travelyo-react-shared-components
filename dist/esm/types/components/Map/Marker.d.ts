@@ -9,6 +9,7 @@ interface MarkerProps {
         lng: number;
     } | null) => void;
     onClick?: Function;
+    active: boolean;
 }
-declare const Marker: ({ hotelPosition, poi, onHover, onClick, }: MarkerProps) => React.JSX.Element;
+declare const Marker: ({ hotelPosition, poi, active, onHover, onClick, }: MarkerProps) => React.JSX.Element;
 export default Marker;
