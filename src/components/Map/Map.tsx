@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, Polyline, LoadScriptProps } from '@react-google-maps/api'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Marker from './Marker'
@@ -25,8 +25,8 @@ export interface PoiProps {
     unit: string,
     value: string,
   },
-  latitude: string,
-  longitude: string,
+  latitude: number,
+  longitude: number,
   mode: string,
   order_value: number,
   poi: {
@@ -78,6 +78,21 @@ const Map = ({
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
 
+  const onHoverPoi = (poi: PoiProps | null) => {
+    setHoveredPoi(poi);
+
+    if (activePoi) {
+      if (hoveredPoi?.latitude !== activePoi.latitude && hoveredPoi?.longitude !== activePoi.longitude) {
+        setActivePoi(null);
+      }
+    }
+  }
+  
+  const onOutsideClick = () => {
+    setActivePoi(null);
+    setHoveredPoi(null);
+  }
+
   return (
     <div className="tsc-map-wrapper">
       <GoogleMap
@@ -86,7 +101,7 @@ const Map = ({
         zoom={zoom}
         center={center}
         options={mapOptions}
-        onClick={() => setActivePoi(null)}
+        onClick={onOutsideClick}
       >
         <HotelMarker position={center} />
         {poiList && poiList.map((poi: any, index: number) => (
@@ -94,8 +109,9 @@ const Map = ({
             key={index}
             poi={poi}
             hotelPosition={center}
-            onHover={setHoveredPoi}
+            onHover={onHoverPoi}
             onClick={setActivePoi}
+            active={activePoi?.latitude === poi.latitude && activePoi?.longitude === poi.longitude}
           />
         ))}
         {hoveredPoi && (
@@ -107,6 +123,18 @@ const Map = ({
               strokeWeight: 3,
             }}
             visible={hoveredPoi !== null}
+          />
+        )}
+
+        {activePoi && (
+          <Polyline
+            path={[center, { lat: activePoi.latitude, lng: activePoi.longitude }]}
+            options={{
+              strokeColor: '#363F49',
+              strokeOpacity: 1,
+              strokeWeight: 3,
+            }}
+            visible={activePoi !== null}
           />
         )}
         <SwitchTransition mode="out-in">

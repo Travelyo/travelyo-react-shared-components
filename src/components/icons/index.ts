@@ -5,3 +5,4 @@ export { default as WalkIcon } from './WalkIcon';
 export { default as CarIcon } from './CarIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as PinIcon } from  './PinIcon';
+export { default as ShareIcon } from  './ShareIcon';
