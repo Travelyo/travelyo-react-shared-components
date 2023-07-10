@@ -16,8 +16,8 @@ const PoiPanel = ({
   const labelProps = {
     hours: poi.time.hours,
     minutes: poi.time.minutes,
-    type: poi.type,
-    unit: poi.distance.unit,
+    type: t(`dyn-package.${poi.type}`),
+    unit: t(`dyn-package.${poi.distance.unit}`),
     distance: poi.distance.value,
   }
 

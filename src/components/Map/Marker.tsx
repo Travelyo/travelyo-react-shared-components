@@ -70,9 +70,9 @@ const Marker = ({
   const tooltipLabelProps = {
     hours: time.hours,
     minutes: time.minutes,
-    type: poi.type,
+    type: t(`dyn-package.${poi.type}`),
     distance: poi.distance.value,
-    unit: poi.distance.unit,
+    unit: t(`dyn-package.${poi.distance.unit}`),
   }
 
   const tooltipLabel = time.hours > 0
