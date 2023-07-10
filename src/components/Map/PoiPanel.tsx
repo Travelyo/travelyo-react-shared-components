@@ -18,7 +18,9 @@ const PoiPanel = ({
     minutes: poi.time.minutes,
     type: poi.type,
     unit: poi.distance.unit,
+    distance: poi.distance.value,
   }
+
   const distanceLabel = poi.time.hours > 0
     ? t('dyn-package.sharedMap.poiDistanceHours', labelProps)
     : t('dyn-package.sharedMap.poiDistanceMinutes', labelProps);
