@@ -51,7 +51,7 @@ const HotelMarker = ({
           onMouseOut={onMarkerHoverOut}
           className="overlay-view-marker marker-hotel"
         >
-          <Circle
+          {/* <Circle
             center={position}
             radius={500}
             options={{
@@ -59,7 +59,7 @@ const HotelMarker = ({
               fillOpacity: 0.15,
               strokeOpacity: 0,
             }}
-          />
+          /> */}
           <SVG src={iconUrl} className="tsc-map-pin-icon" />
         </div>
       </OverlayViewF>

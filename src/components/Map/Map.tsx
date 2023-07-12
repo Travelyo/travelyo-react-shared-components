@@ -17,6 +17,8 @@ export type MapProps = {
   poiList?: PoiProps[],
   hotel: HotelPanelProps,
   mapId?: string,
+  onHotelLinkClick?: () => void,
+  onWebsiteLinkClick?: () => void,
 }
 
 export interface PoiProps {
@@ -61,6 +63,8 @@ const Map = ({
   zoom,
   hotel,
   mapId,
+  onHotelLinkClick,
+  onWebsiteLinkClick,
 }: MapProps) => {
   const mapOptions = {
     ...mapConfig,
@@ -117,7 +121,14 @@ const Map = ({
             timeout={150}
           >
             <div ref={panelsRef}>
-              {activePoi ? <PoiPanel poi={activePoi} /> : <HotelPanel hotel={hotel} />}
+              {activePoi ?
+                <PoiPanel poi={activePoi} />
+                : <HotelPanel
+                    hotel={hotel}
+                    onHotelLinkClick={onHotelLinkClick}
+                    onWebsiteLinkClick={onWebsiteLinkClick}
+                  />
+              }
             </div>
           </CSSTransition>
         </SwitchTransition>

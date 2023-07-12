@@ -7,9 +7,15 @@ import t from '../../services/translatorService';
 
 interface Props {
   hotel: HotelPanelProps;
+  onHotelLinkClick?: () => void,
+  onWebsiteLinkClick?: () => void,
 }
 
-const HotelPanel = ({ hotel }: Props) => {
+const HotelPanel = ({
+  hotel,
+  onHotelLinkClick,
+  onWebsiteLinkClick,
+}: Props) => {
   const {
     name,
     address,
@@ -51,13 +57,13 @@ const HotelPanel = ({ hotel }: Props) => {
             {(hotelWebsiteLink || googleMapsLink) && (
               <div className="tsc-hotel-panel__buttons">
                 {hotelWebsiteLink && (
-                  <a href={hotelWebsiteLink} target="_blank" className="tsc-hotel-panel__button">
+                  <a href={hotelWebsiteLink} onClick={onHotelLinkClick} target="_blank" className="tsc-hotel-panel__button">
                     <LinkIcon />
                     <span>{t('dyn-package.hotelWebsite')}</span>
                   </a>
                 )}
                 {googleMapsLink && (
-                  <a href={googleMapsLink} target="_blank" className="tsc-hotel-panel__button">
+                  <a href={googleMapsLink} onClick={onWebsiteLinkClick} target="_blank" className="tsc-hotel-panel__button">
                     <PinIcon />
                     <span>{t('dyn-package.showOnMap')}</span>
                   </a>
