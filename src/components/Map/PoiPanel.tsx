@@ -1,7 +1,6 @@
 import React from 'react'
 import Panel from './Panel'
 import { PoiProps } from './Map'
-import { getDistanceLabel } from '../../services/mapService'
 import { CarIcon, WalkIcon } from '../icons'
 import t from '../../services/translatorService'
 
@@ -14,6 +13,18 @@ const PoiPanel = ({
   image,
   poi
 }: PoiPanelProps) => {
+  const labelProps = {
+    hours: poi.time.hours,
+    minutes: poi.time.minutes,
+    type: t(`dyn-package.${poi.type}`),
+    unit: t(`dyn-package.${poi.distance.unit}`),
+    distance: poi.distance.value,
+  }
+
+  const distanceLabel = poi.time.hours > 0
+    ? t('dyn-package.sharedMap.poiDistanceHours', labelProps)
+    : t('dyn-package.sharedMap.poiDistanceMinutes', labelProps);
+
   return (
     <Panel position="bottom" className="tsc-map-panel__poi">
       {image && (
@@ -28,7 +39,7 @@ const PoiPanel = ({
           ) : (
             <CarIcon size={16} />
           )}
-          <span>{getDistanceLabel(poi.time)} {poi.type ? t(`dyn-package.${poi.type}`) : ''} ({poi.distance.value} {t(`dyn-package.${poi.distance.unit}`)})</span>
+          <span>{distanceLabel}</span>
         </div>
       </div>
     </Panel>

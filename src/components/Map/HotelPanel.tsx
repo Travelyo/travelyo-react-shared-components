@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Panel from './Panel'
 import { CSSTransition } from 'react-transition-group'
-import { ArrowDown, LinkIcon, PinIcon, StarIcon } from '../icons';
+import { ArrowDown, LinkIcon, ShareIcon, StarIcon } from '../icons';
 import { HotelPanelProps } from '../../interfaces/interfaces';
 import t from '../../services/translatorService'; 
 
@@ -25,7 +25,7 @@ const HotelPanel = ({
     hotelWebsiteLink,
   } = hotel;
   const hotelInfoRef = useRef(null);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(window.innerWidth > 768);
 
   const ratingStars = new Array(rating).fill(0).map((_, i) => (
     <StarIcon size={13} key={i} />
@@ -59,13 +59,13 @@ const HotelPanel = ({
                 {hotelWebsiteLink && (
                   <a href={hotelWebsiteLink} onClick={onHotelLinkClick} target="_blank" className="tsc-hotel-panel__button">
                     <LinkIcon />
-                    <span>{t('dyn-package.hotelWebsite')}</span>
+                    <span>{t('dyn-package.sharedMap.hotelWebsite')}</span>
                   </a>
                 )}
                 {googleMapsLink && (
                   <a href={googleMapsLink} onClick={onWebsiteLinkClick} target="_blank" className="tsc-hotel-panel__button">
-                    <PinIcon />
-                    <span>{t('dyn-package.showOnMap')}</span>
+                    <ShareIcon />
+                    <span>{t('dyn-package.sharedMap.showOnMap')}</span>
                   </a>
                 )}
               </div>

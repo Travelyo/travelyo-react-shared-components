@@ -4,6 +4,7 @@ import SVG from 'react-inlinesvg';
 import { PoiProps } from './Map';
 import { getDistanceLabel } from '../../services/mapService';
 import { CarIcon, WalkIcon } from '../icons';
+import t from '../../services/translatorService';
 
 interface MarkerProps {
   hotelPosition: google.maps.LatLngLiteral,
@@ -14,11 +15,13 @@ interface MarkerProps {
       lng: number,
     } | null) => void,
   onClick?: Function,
+  active: boolean,
 }
 
 const Marker = ({
   hotelPosition,
   poi,
+  active,
   onHover = () => {},
   onClick = () => {},
 }: MarkerProps) => {
@@ -33,8 +36,8 @@ const Marker = ({
     }
   } = poi;
   const position = useMemo(() => ({
-    lat: parseFloat(latitude),
-    lng: parseFloat(longitude),
+    lat: latitude,
+    lng: longitude,
   }), [latitude, longitude])
   const iconUrl = `https://d16tr0byigrcd.cloudfront.net/hf-dev/images/hfmap/map-${type}.svg`;
 
@@ -64,6 +67,30 @@ const Marker = ({
     position: position,
   }
 
+  const tooltipLabelProps = {
+    hours: time.hours,
+    minutes: time.minutes,
+    type: t(`dyn-package.${poi.type}`),
+    distance: poi.distance.value,
+    unit: t(`dyn-package.${poi.distance.unit}`),
+  }
+
+  const tooltipLabel = time.hours > 0
+    ? t('dyn-package.sharedMap.poiTooltipHours', tooltipLabelProps)
+    : t('dyn-package.sharedMap.poiTooltipMinutes', tooltipLabelProps)
+
+  const getTooltipDirection = () => {
+    let direction = '';
+
+    if (poi.latitude >= hotelPosition.lat) {
+      direction = poi.longitude >= hotelPosition.lng ? 'left' : 'right';
+    } else {
+      direction = poi.longitude >= hotelPosition.lng ? 'right' : 'left';
+    }
+
+    return direction;
+  }
+
   return (
     <GoogleMarker
       position={position}
@@ -85,19 +112,19 @@ const Marker = ({
       </OverlayViewF>
 
       <OverlayViewF {...overlayViewProps}>
-        {isHovering && (
+        {(isHovering || active) && (
           <div>
             <div className="tsc-map-label">
               {name}
             </div>
             <OverlayViewF position={getMidPoint(hotelPosition, position)} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-              <div className="tsc-map-tooltip">
+              <div className={`tsc-map-tooltip tsc-map-tooltip--${getTooltipDirection()}`}>
                 {poi.type === 'walk' ? (
                   <WalkIcon size={16} fill="#ffffff" />
                 ) : (
                   <CarIcon size={16} fill="#ffffff" />
                 )}
-                <span>{getDistanceLabel(time)}</span>
+                <span>{tooltipLabel}</span>
               </div>
             </OverlayViewF>
           </div>
