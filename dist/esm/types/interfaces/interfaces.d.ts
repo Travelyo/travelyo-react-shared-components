@@ -10,4 +10,6 @@ export interface HotelPanelProps {
     rating: number;
     googleMapsLink?: string;
     hotelWebsiteLink?: string;
+    onHotelLinkClick?: () => void;
+    onWebsiteLinkClick?: () => void;
 }
