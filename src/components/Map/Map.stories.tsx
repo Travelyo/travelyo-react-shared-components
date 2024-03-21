@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from 'react';
-import "./Map.scss";
 
 import Map from "./Map";
 

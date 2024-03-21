@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, Polyline, LoadScriptProps } from '@react-google-maps/api'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
-import Marker from './Marker'
-import './Map.scss';
+import Marker from './Marker';
 import HotelMarker from './Markers/HotelMarker';
 import PoiPanel from './PoiPanel';
 import HotelPanel from './HotelPanel';

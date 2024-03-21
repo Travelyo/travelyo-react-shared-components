@@ -14,7 +14,7 @@ export default [
     input: ["src/index.ts", "src/style.ts"],
     output: [
       {
-        dir: "dist",
+        dir: 'dist',
         format: "esm",
         sourcemap: true,
       },

@@ -1,0 +1,97 @@
+.voyage-input {
+  width: 100%;
+  height: 48px;
+  padding: 16px;
+  border-radius: var(--Border-Radius-System-radius-tiny, 8px);
+  border: 1px solid $shark-200;
+  background: white;
+  box-sizing: border-box;
+
+  text-overflow: ellipsis;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+
+  transition: 150ms;
+
+  &::placeholder {
+    color: $shark-300;
+  }
+
+  &:hover {
+    border: 1px solid $shark-400;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &:focus {
+    border: 1px solid var(--Color-System-Text-text-primary, #262626);
+    box-shadow: 0px 0px 0px 1px #262626;
+  }
+
+  &--padding-start {
+    padding-inline-start: 44px;
+  }
+
+  &--padding-end {
+    padding-inline-end: 44px;
+  }
+
+  &__group {
+    width: 100%;
+
+    label {
+      width: 100%;
+    }
+  }
+
+  &__label,
+  &__help {
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14px;
+  }
+
+  &__help {
+    color: var(--Color-Shark-Shark-300, #B0B0B0);
+  }
+  
+  &__label-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__icon {
+    font-size: 20px;
+    line-height: 1;
+    color: #B0B0B0;
+    position: absolute;
+
+    &--start {
+      left: 16px;
+
+      &:lang(he) {
+        left: unset;
+        right: 16px;
+      }
+    }
+
+    &--end {
+      right: 16px;
+
+      &:lang(he) {
+        right: unset;
+        left: 16px;
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import type { Preview } from "@storybook/react";
+import 'remixicon/fonts/remixicon.css';
+import '../src/styles/index.scss';
 
 const preview: Preview = {
   parameters: {
