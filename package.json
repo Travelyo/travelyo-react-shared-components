@@ -3,6 +3,7 @@
   "version": "0.0.8",
   "description": "Shared components for travelyo packages",
   "scripts": {
+    "dev": "rollup -c -w --bundleConfigAsCjs",
     "rollup": "rollup -c --bundleConfigAsCjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
@@ -41,6 +42,7 @@
     "@types/react-transition-group": "^4.4.6",
     "css-loader": "^6.8.1",
     "node-sass": "^9.0.0",
+    "postcss-import": "^16.0.1",
     "postcss-scss": "^4.0.6",
     "prop-types": "^15.8.1",
     "rollup": "^3.25.1",
@@ -55,15 +57,16 @@
   },
   "peerDependencies": {
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "remixicon": "^4.2.0"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist",
     "dist/**/*.css"
   ],
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
     "@storybook/test": "^8.0.0",

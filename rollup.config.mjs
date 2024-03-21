@@ -11,15 +11,10 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default [
   {
-    input: "src/index.ts",
+    input: ["src/index.ts", "src/style.ts"],
     output: [
       {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: true,
-      },
-      {
-        file: packageJson.module,
+        dir: "dist",
         format: "esm",
         sourcemap: true,
       },
@@ -47,7 +42,7 @@ export default [
       postcss({
         extensions: ['.css', '.scss'],
         minimize: true,
-        extract: true,
+        extract: 'index.css',
         parser: 'postcss-scss',
       }),
     ],
