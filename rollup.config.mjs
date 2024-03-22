@@ -17,7 +17,14 @@ export default [
         dir: 'dist',
         format: "esm",
         sourcemap: true,
+        entryFileNames: '[name].esm.js'
       },
+      {
+        dir: 'dist',
+        format: "cjs",
+        sourcemap: true,
+        entryFileNames: '[name].cjs.js'
+      }
     ],
     plugins: [
       peerDepsExternal(),

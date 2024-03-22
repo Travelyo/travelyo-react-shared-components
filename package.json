@@ -61,8 +61,8 @@
     "remixicon": "^4.2.0",
     "@react-google-maps/api": "^2.18.1"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/your-library.cjs.js",
+  "module": "dist/your-library.esm.js",
   "files": [
     "dist",
     "dist/**/*.css"
