@@ -25,17 +25,11 @@ export default [
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       babel({
+        exclude: 'node_modules/**',
         extensions,
         babelHelpers: 'bundled',
         presets: [
-          ['@babel/preset-env', {
-            "targets": {
-              "esmodules": true,
-              "ie": "11"
-            },
-            "useBuiltIns": "entry",
-            "corejs": 3
-          }],
+          '@babel/preset-react',
         ],
       }),
       terser(),
