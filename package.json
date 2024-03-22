@@ -58,8 +58,7 @@
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18",
-    "remixicon": "^4.2.0",
-    "@react-google-maps/api": "^2.18.1"
+    "remixicon": "^4.2.0"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -71,6 +70,7 @@
   "dependencies": {
     "@storybook/test": "^8.0.0",
     "react-inlinesvg": "^3.0.2",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "@react-google-maps/api": "^2.18.1"
   }
 }
