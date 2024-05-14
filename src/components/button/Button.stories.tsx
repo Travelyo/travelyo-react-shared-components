@@ -12,7 +12,9 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
+  name: "Button playground",
   args: {
-    label: "Button",
+    label: "Let's start",
+    size: "medium",
   },
 }

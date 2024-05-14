@@ -21,6 +21,8 @@ $brand-200: var(--color-brand-200, #BCDEFF);
 $brand-100: var(--color-brand-100, #DAEAFF);
 $brand-50: var(--color-brand-50, #EFF7FF);
 $info-light: #DBE9FF;
+$brand-primary: var(--color-brand-primary, $brand-600);
+$brand-secondary: var(--color-brand-secondary, $brand-400);
 
 $info-dark: #69AEFF;
 $info-light: #DBE9FF;
