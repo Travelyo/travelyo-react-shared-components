@@ -4,5 +4,5 @@ interface PoiPanelProps {
     image?: string;
     poi: PoiProps;
 }
-declare const PoiPanel: ({ image, poi }: PoiPanelProps) => React.JSX.Element;
+declare const PoiPanel: ({ poi }: PoiPanelProps) => React.JSX.Element;
 export default PoiPanel;
