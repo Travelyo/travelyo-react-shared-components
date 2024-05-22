@@ -10,7 +10,6 @@ interface PoiPanelProps {
 }
 
 const PoiPanel = ({
-  image,
   poi
 }: PoiPanelProps) => {
   const labelProps = {
@@ -27,8 +26,8 @@ const PoiPanel = ({
 
   return (
     <Panel position="bottom" className="tsc-map-panel__poi">
-      {image && (
-        <img src={image} alt="" className="tsc-poi-image" />
+      {poi.photo && (
+        <img src={poi.photo} alt="" className="tsc-poi-image" />
       )}
       <div className="tsc-poi-content">
         <div className="tsc-poi-content__title">{poi.poi.name}</div>

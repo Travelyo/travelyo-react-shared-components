@@ -48,6 +48,7 @@ export const Primary: Story = {
           "Serene royal park with picturesque landscapes and Kensington Palace.",
         latitude: 51.50692,
         longitude: -0.17857,
+        photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Italian_Garden_fountains.jpg/1920px-Italian_Garden_fountains.jpg"
       },
       {
         order_value: 17,

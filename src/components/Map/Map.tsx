@@ -29,6 +29,7 @@ export interface PoiProps {
   },
   latitude: number,
   longitude: number,
+  photo?: string,
   mode: string,
   order_value: number,
   poi: {
