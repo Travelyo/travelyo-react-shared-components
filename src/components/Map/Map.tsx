@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, Polyline, LoadScriptProps } from '@react-google-maps/api'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Marker from './Marker'
@@ -77,25 +77,20 @@ const Map = ({
     googleMapsApiKey: apiKey,
     libraries: googleApiLibraries,
   });
-  const [hoveredPoi, setHoveredPoi] = useState<PoiProps | null>(null);
   const [activePoi, setActivePoi] = useState<PoiProps | null>(null);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
 
   const onHoverPoi = (poi: PoiProps | null) => {
-    setHoveredPoi(poi);
-
-    if (activePoi) {
-      if (hoveredPoi?.latitude !== activePoi.latitude && hoveredPoi?.longitude !== activePoi.longitude) {
-        setActivePoi(null);
-      }
+    console.log('selected poi: ', poi)
+    if (poi) {
+      setActivePoi(poi);
     }
   }
   
   const onOutsideClick = () => {
     setActivePoi(null);
-    setHoveredPoi(null);
   }
 
   return (
@@ -119,18 +114,6 @@ const Map = ({
             active={activePoi?.latitude === poi.latitude && activePoi?.longitude === poi.longitude}
           />
         ))}
-        {hoveredPoi && (
-          <Polyline
-            path={[center, { lat: hoveredPoi.latitude, lng: hoveredPoi.longitude }]}
-            options={{
-              strokeColor: '#363F49',
-              strokeOpacity: 1,
-              strokeWeight: 3,
-            }}
-            visible={hoveredPoi !== null}
-          />
-        )}
-
         {activePoi && (
           <Polyline
             path={[center, { lat: activePoi.latitude, lng: activePoi.longitude }]}
