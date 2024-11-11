@@ -86,11 +86,11 @@ const Map = ({
   const onHoverPoi = (poi: PoiProps | null) => {
     setHoveredPoi(poi);
 
-    // if (activePoi) {
-    //   if (hoveredPoi?.latitude !== activePoi.latitude && hoveredPoi?.longitude !== activePoi.longitude) {
-    //     setActivePoi(null);
-    //   }
-    // }
+    if (activePoi) {
+      if (hoveredPoi?.latitude !== activePoi.latitude && hoveredPoi?.longitude !== activePoi.longitude) {
+        setActivePoi(null);
+      }
+    }
   }
   
   const onOutsideClick = () => {
