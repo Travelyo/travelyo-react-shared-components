@@ -13,16 +13,19 @@ const PoiPanel = ({
   poi
 }: PoiPanelProps) => {
   const labelProps = {
-    hours: poi.time.hours,
-    minutes: poi.time.minutes,
-    type: t(`dyn-package.${poi.type}`),
-    unit: t(`dyn-package.${poi.distance.unit}`),
-    distance: poi.distance.value,
+    hours: poi?.time?.hours,
+    minutes: poi?.time?.minutes,
+    type: t(`dyn-package.${poi?.type}`),
+    unit: t(`dyn-package.${poi?.distance?.unit}`),
+    distance: poi?.distance?.value,
   }
 
-  const distanceLabel = poi.time.hours > 0
-    ? t('dyn-package.sharedMap.poiDistanceHours', labelProps)
-    : t('dyn-package.sharedMap.poiDistanceMinutes', labelProps);
+  let distanceLabel = '';
+  if (poi?.time?.hours || poi?.time?.minutes) {
+    distanceLabel = poi?.time?.hours > 0
+      ? t('dyn-package.sharedMap.poiDistanceHours', labelProps)
+      : t('dyn-package.sharedMap.poiDistanceMinutes', labelProps);
+  }
 
   return (
     <Panel position="bottom" className="tsc-map-panel__poi">
@@ -32,14 +35,16 @@ const PoiPanel = ({
       <div className="tsc-poi-content">
         <div className="tsc-poi-content__title">{poi.poi.name}</div>
         <div className="tsc-poi-content__text">{poi.description}</div>
-        <div className="tsc-poi-content__distance">
-          {poi.type === 'walk' ? (
-            <WalkIcon size={16} />
-          ) : (
-            <CarIcon size={16} />
-          )}
-          <span>{distanceLabel}</span>
-        </div>
+        {!!distanceLabel && (
+          <div className="tsc-poi-content__distance">
+            {poi.type === 'walk' ? (
+              <WalkIcon size={16} />
+            ) : (
+              <CarIcon size={16} />
+            )}
+            <span>{distanceLabel}</span>
+          </div>
+        )}
       </div>
     </Panel>
   )
