@@ -68,16 +68,19 @@ const Marker = ({
   }
 
   const tooltipLabelProps = {
-    hours: time.hours,
-    minutes: time.minutes,
-    type: t(`dyn-package.${poi.type}`),
-    distance: poi.distance.value,
-    unit: t(`dyn-package.${poi.distance.unit}`),
+    hours: time?.hours,
+    minutes: time?.minutes,
+    type: t(`dyn-package.${poi?.type}`),
+    distance: poi?.distance?.value,
+    unit: t(`dyn-package.${poi?.distance?.unit}`),
   }
 
-  const tooltipLabel = time.hours > 0
-    ? t('dyn-package.sharedMap.poiTooltipHours', tooltipLabelProps)
-    : t('dyn-package.sharedMap.poiTooltipMinutes', tooltipLabelProps)
+  let tooltipLabel = '';
+  if (time?.hours || time?.minutes) {
+    tooltipLabel = time?.hours > 0
+      ? t('dyn-package.sharedMap.poiTooltipHours', tooltipLabelProps)
+      : t('dyn-package.sharedMap.poiTooltipMinutes', tooltipLabelProps);
+  }
 
   const getTooltipDirection = () => {
     let direction = '';
@@ -117,16 +120,18 @@ const Marker = ({
             <div className="tsc-map-label">
               {name}
             </div>
-            <OverlayViewF position={getMidPoint(hotelPosition, position)} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-              <div className={`tsc-map-tooltip tsc-map-tooltip--${getTooltipDirection()}`}>
-                {poi.type === 'walk' ? (
-                  <WalkIcon size={16} fill="#ffffff" />
-                ) : (
-                  <CarIcon size={16} fill="#ffffff" />
-                )}
-                <span>{tooltipLabel}</span>
-              </div>
-            </OverlayViewF>
+            {!!tooltipLabel && (
+              <OverlayViewF position={getMidPoint(hotelPosition, position)} mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
+                <div className={`tsc-map-tooltip tsc-map-tooltip--${getTooltipDirection()}`}>
+                  {poi.type === 'walk' ? (
+                    <WalkIcon size={16} fill="#ffffff" />
+                  ) : (
+                    <CarIcon size={16} fill="#ffffff" />
+                  )}
+                  <span>{tooltipLabel}</span>
+                </div>
+              </OverlayViewF>
+            )}
           </div>
         )}
       </OverlayViewF>
