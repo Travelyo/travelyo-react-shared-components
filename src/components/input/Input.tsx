@@ -30,10 +30,12 @@ const Input = (props: InputProps) => {
   return (
     <div className="voyage-input__group">
       <label>
-        <div className="voyage-input__label-group">
-          <div className="voyage-input__label">{label}</div>
-          <div className="voyage-input__help">{helpLabel}</div>
-        </div>
+        {label || helpLabel && (
+          <div className="voyage-input__label-group">
+            <div className="voyage-input__label">{label}</div>
+            <div className="voyage-input__help">{helpLabel}</div>
+          </div>
+        )}
         <div className="voyage-input__wrap">
           {startIcon && <span className="voyage-input__icon  voyage-input__icon--start">{startIcon}</span>}
           <input

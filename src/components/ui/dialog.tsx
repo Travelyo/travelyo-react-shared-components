@@ -17,8 +17,12 @@ const DialogContext = createContext({
   setIsOpen: (state: boolean) => {},
 })
 
-const useDialog = () => {
-  return useContext(DialogContext)
+export const useDialog = () => {
+  const context = useContext(DialogContext);
+  if (context === undefined) {
+    throw new Error("useDialog must be used within a Dialog provider");
+  }
+  return context;
 }
 
 const Dialog = ({ children, className, ...props }: DialogProps) => {
@@ -86,9 +90,13 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
   );
 };
 
-const DialogClose = ({ children }: { children: React.ReactNode }) => {
+const DialogClose = () => {
   const { setIsOpen } = useDialog();
-  return <button onClick={() => setIsOpen(false)}>{children}</button>;
+  return (
+    <button onClick={() => setIsOpen(false)} className="absolute right-3 top-3 w-9 h-9 flex items-center justify-center rounded-full bg-snow cursor-pointer">
+      <i className="ri-close-line text-xl text-shark-400" />
+    </button>
+  );
 };
 
 export {

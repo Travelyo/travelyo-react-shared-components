@@ -14,8 +14,8 @@ type ButtonProps = {
 const Button = ({
   label,
   onClick,
-  variant,
-  size,
+  variant = 'primary',
+  size = 'medium',
   rounded,
   inverted,
   className,

@@ -13,6 +13,6 @@ type Story = StoryObj<typeof Proposal>;
 
 export const Primary: Story = {
   args: {
-    trigger: <button>Trigger</button>,
+    trigger: <button>Add to proposal</button>,
   }
 }
