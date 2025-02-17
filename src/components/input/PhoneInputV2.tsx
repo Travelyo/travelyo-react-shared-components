@@ -16,6 +16,7 @@ const PhoneInputV2 = ({
           separateDialCode: true,
           countrySearch: false,
           fixDropdownWidth: false,
+          countryOrder: ['IL', 'DE', 'AT', 'CH'],
         }}
         inputProps={{
           className: 'voyage-phone-input',

@@ -98,7 +98,7 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
 const DialogClose = () => {
   const { setIsOpen } = useDialog();
   return (
-    <button onClick={() => setIsOpen(false)} className="absolute right-3 top-3 w-9 h-9 flex items-center justify-center rounded-full bg-snow cursor-pointer border-none">
+    <button onClick={() => setIsOpen(false)} className="voyage-dialog__close">
       <i className="ri-close-line text-xl text-shark-400" />
     </button>
   );
