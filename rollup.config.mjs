@@ -6,6 +6,8 @@ import terser from '@rollup/plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
 import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
+import alias from '@rollup/plugin-alias';
+import path from 'path';
 
 const packageJson = require('./package.json');
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -29,6 +31,11 @@ export default [
     ],
     external: /^(react|react-dom|remixicon)(\/.*)?$/,
     plugins: [
+      alias({
+        entries: [
+          { find: '@', replacement: path.resolve(__dirname, 'src') },
+        ]
+      }),
       // peerDepsExternal(),
       excludeDependenciesFromBundle({
         peerDependencies: true,
