@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const labelVariants = cva(
-  "text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-checked:font-semibold", {
+  "m-0 text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 peer-checked:font-semibold", {
     variants: {
       variant: {
         default: "text-shark-900 peer-checked:font-semibold",

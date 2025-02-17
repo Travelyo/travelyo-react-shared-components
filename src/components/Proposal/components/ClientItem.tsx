@@ -15,7 +15,7 @@ const ClientItem = ({
 }: Props) => {
   return (
     <div className={cn('p-5 rounded-xl flex flex-col gap-3 bg-shark-25 cursor-pointer', { 'border-2 border-primary': selected })} onClick={onClick}>
-        <div className="font-semibold text-lg leading-none">{client.name}</div>
+        <div className="font-semibold text-lg leading-none">{`${client.firstName} ${client.lastName}`}</div>
         {client.phone && <div className="font-medium leading-none">{client.phone}</div>}
         {client.email && <div className="font-medium leading-none">{client.email}</div>}
     </div>

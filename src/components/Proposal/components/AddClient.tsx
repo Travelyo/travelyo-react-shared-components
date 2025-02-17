@@ -1,15 +1,21 @@
-import Input from '@/components/input'
+import React, { FormEvent } from 'react'
+import { Input } from '@/components/input'
+import PhoneInputV2 from '@/components/input/PhoneInputV2'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import React from 'react'
 
 type Props = {}
 
 const AddClient = (props: Props) => {
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    console.log(e.target)
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="text-xl font-semibold">New Client</div>
-      <div className="flex flex-col gap-6">
+      <form className="flex flex-col gap-6" onSubmit={handleFormSubmit}>
         <RadioGroup defaultValue="option-one" className='flex flex-row gap-4'>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="mr" id="mr" />
@@ -28,11 +34,12 @@ const AddClient = (props: Props) => {
           startIcon={<i className="ri-user-3-line" />}
           placeholder="Last name"
         />
+        <PhoneInputV2 />
         <Input
           startIcon={<i className="ri-mail-send-line" />}
           placeholder="Email"
         />
-      </div>
+      </form>
     </div>
   )
 }

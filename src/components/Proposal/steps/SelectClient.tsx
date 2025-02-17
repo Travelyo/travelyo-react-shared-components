@@ -1,25 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AddClient from '../components/AddClient'
-import { DialogContent, useDialog } from '@/components/ui/dialog'
+import { useDialog } from '@/components/ui/dialog'
 import Button from '@/components/button'
-import Input from '@/components/input'
 import SearchClient from '../components/SearchClient'
-import { Proposal } from '../ProposalTypes'
 
-type Props = {
-  clients: Proposal['client'][]
-}
+type Props = {}
 
-const SelectClient = ({
-  clients,
-}: Props) => {
+const SelectClient = (props: Props) => {
   const { setIsOpen } = useDialog()
+  const [search, setSearch] = useState('')
 
   return (
     <>
-      <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
-        <SearchClient clients={clients} />
-        <AddClient />
+      <div className="flex flex-col gap-2 mb-7 overflow-y-auto h-full">
+        <SearchClient search={search} setSearch={setSearch} />
+        {search.length === 0 && <AddClient />}
       </div>
 
       <div className="flex justify-between mt-auto">

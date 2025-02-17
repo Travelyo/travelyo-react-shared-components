@@ -2,9 +2,10 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+// import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import babel from '@rollup/plugin-babel';
+import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
 
 const packageJson = require('./package.json');
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -26,8 +27,13 @@ export default [
         entryFileNames: '[name].cjs.js'
       }
     ],
+    external: /^(react|react-dom|remixicon)(\/.*)?$/,
     plugins: [
-      peerDepsExternal(),
+      // peerDepsExternal(),
+      excludeDependenciesFromBundle({
+        peerDependencies: true,
+        dependencies: false,
+      }),
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
@@ -45,6 +51,11 @@ export default [
         minimize: true,
         extract: 'index.css',
         parser: 'postcss-scss',
+        plugins: [
+          require('postcss-import'),
+          require('@tailwindcss/postcss'),
+          require('autoprefixer'),
+        ],
       }),
     ],
   },

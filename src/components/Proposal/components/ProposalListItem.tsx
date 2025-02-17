@@ -11,7 +11,7 @@ const ProposalListItem = ({
   return (
     <div className="flex justify-between items-center px-5 py-4 bg-shark-25 rounded-xl">
       <div className="font-semibold">{data.name}</div>
-      <button className="h-10 w-10 flex items-center justify-center rounded-full bg-white cursor-pointer"><i className="ri-add-line" /></button>
+      <button className="border-none h-10 w-10 flex items-center justify-center rounded-full bg-white cursor-pointer"><i className="ri-add-line" /></button>
     </div>
   )
 }

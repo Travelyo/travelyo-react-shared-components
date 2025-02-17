@@ -4,32 +4,14 @@ import AddProposal from '../components/AddProposal'
 import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
 import { Proposal } from '../ProposalTypes'
+import { useProposalContext } from '../proposalContext'
 
 type Props = {}
 
-const proposals: Proposal[] = [
-  {
-  "id": 23,
-  "name": "-",
-  "status": "1",
-  "user": {
-    "muid": "e9c6690252f7be9383859f4a8ccd809j",
-    "email": "cristiant@wearemove.io",
-  },
-  "client": {
-    "id": 2,
-    "name": "email@test.ro",
-    "phone": "0723456789",
-    "email": "cristiant@wearemove.io",
-  },
-  "createdAt": "2025-02-12 13:33:32",
-  "updatedAt": "2025-02-12 15:41:45",
-  "numberOfOffers": 1
-  }
-]
-
 const SelectProposal = (props: Props) => {
   const { setIsOpen } = useDialog()
+  const { proposals, setStep } = useProposalContext()
+
   return (
     <>
       <div className="text-xl font-semibold mb-6">Add to proposal</div>
@@ -51,6 +33,7 @@ const SelectProposal = (props: Props) => {
         <Button
           label='Confirm'
           size="large"
+          onClick={() => setStep('selectClient')}
           rounded
         />
       </div>

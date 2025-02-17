@@ -5,6 +5,7 @@ import cn from "classnames"
 type DialogProps = {
   children: React.ReactNode
   className?: string
+  onOpenChange?: () => void
 }
 
 interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
@@ -25,8 +26,12 @@ export const useDialog = () => {
   return context;
 }
 
-const Dialog = ({ children, className, ...props }: DialogProps) => {
+const Dialog = ({ children, className, onOpenChange, ...props }: DialogProps) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (onOpenChange) onOpenChange()
+  }, [isOpen])
 
   return (
     <DialogContext.Provider value={{ isOpen, setIsOpen }}>
@@ -93,7 +98,7 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
 const DialogClose = () => {
   const { setIsOpen } = useDialog();
   return (
-    <button onClick={() => setIsOpen(false)} className="absolute right-3 top-3 w-9 h-9 flex items-center justify-center rounded-full bg-snow cursor-pointer">
+    <button onClick={() => setIsOpen(false)} className="absolute right-3 top-3 w-9 h-9 flex items-center justify-center rounded-full bg-snow cursor-pointer border-none">
       <i className="ri-close-line text-xl text-shark-400" />
     </button>
   );
