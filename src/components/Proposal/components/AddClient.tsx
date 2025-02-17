@@ -17,11 +17,11 @@ const AddClient = (props: Props) => {
       <div className="text-xl font-semibold">New Client</div>
       <form className="flex flex-col gap-6 mb-20" onSubmit={handleFormSubmit}>
         <RadioGroup defaultValue="option-one" className='flex flex-row gap-4'>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <RadioGroupItem value="mr" id="mr" />
             <Label htmlFor="mr">Mr</Label>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <RadioGroupItem value="mrs" id="mrs" />
             <Label htmlFor="mrs">Mrs</Label>
           </div>

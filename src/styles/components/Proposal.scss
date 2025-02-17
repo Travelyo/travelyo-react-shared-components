@@ -117,3 +117,17 @@
   }
 }
 
+.proposal-client {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 12px;
+  background: #F7F7F7;
+  cursor: pointer;
+  border-radius: 12px;
+
+  &--selected {
+    border: 2px solid #262626;
+  }
+}
+
