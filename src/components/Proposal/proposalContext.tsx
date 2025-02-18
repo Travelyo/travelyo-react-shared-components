@@ -14,7 +14,7 @@ export const ProposalProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(proposalReducer, initialState);
 
   const fetchProposals = async () => {
-    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`);
+    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposals?muid=${getMuid()}`);
     const data = await response.json();
     dispatch({ type: "SET_PROPOSALS", payload: data });
   }
