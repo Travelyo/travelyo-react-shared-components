@@ -1,12 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Proposal } from './ProposalTypes';
+import { ProposalState } from './proposalReducer';
 interface ProposalContextType {
-    proposals: Proposal[];
-    setProposals: React.Dispatch<React.SetStateAction<Proposal[]>>;
-    clients: any[];
-    setClients: React.Dispatch<React.SetStateAction<any[]>>;
-    step: string;
-    setStep: React.Dispatch<React.SetStateAction<string>>;
+    state: ProposalState;
+    dispatch: React.Dispatch<any>;
 }
 export declare const ProposalContext: React.Context<ProposalContextType | undefined>;
 export declare const ProposalProvider: ({ children }: {

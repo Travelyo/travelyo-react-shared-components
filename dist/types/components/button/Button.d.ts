@@ -8,6 +8,7 @@ type ButtonProps = {
     className?: string;
     rounded?: boolean;
     inverted?: boolean;
+    disabled?: boolean;
 };
-declare const Button: ({ label, onClick, variant, size, rounded, inverted, className, ...props }: ButtonProps) => React.JSX.Element;
+declare const Button: ({ label, onClick, variant, size, rounded, inverted, className, disabled, ...props }: ButtonProps) => React.JSX.Element;
 export default Button;
