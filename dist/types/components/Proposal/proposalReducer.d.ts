@@ -2,15 +2,6 @@ import { Proposal } from "./ProposalTypes";
 export interface ProposalState {
     proposals: Proposal[];
     clients: any[];
-    selectedClient: any | null;
-    clientForm: {
-        genderType: string;
-        firstName: string;
-        lastName: string;
-        email: string;
-        phone: string;
-    };
-    isFormValid: boolean;
     step: string;
 }
 type Action = {
@@ -19,16 +10,6 @@ type Action = {
 } | {
     type: "SET_CLIENTS";
     payload: any[];
-} | {
-    type: "SET_SELECTED_CLIENT";
-    payload: any;
-} | {
-    type: "UPDATE_CLIENT_FORM";
-    field: string;
-    value: string;
-} | {
-    type: "SET_VALID_FORM";
-    payload: boolean;
 } | {
     type: "SET_STEP";
     payload: string;
