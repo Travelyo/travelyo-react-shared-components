@@ -6,6 +6,8 @@ import { useProposalContext } from '../proposalContext'
 type Props = {
   search: string,
   setSearch: (value: string) => void,
+  selectedClient: string | null,
+  onSelectClient: (value: string) => void,
 }
 const clientsTemp = [
   {
@@ -72,7 +74,9 @@ const clientsTemp = [
 
 const SearchClient = ({
   search,
-  setSearch
+  setSearch,
+  selectedClient,
+  onSelectClient,
 }: Props) => {
   const { state } = useProposalContext()
   const { clients } = state
@@ -98,7 +102,7 @@ const SearchClient = ({
         <div className="text-xl font-semibold mb-6 leading-none">Client</div>
         <div className="flex flex-col gap-3">
           {filteredClients.map(client => (
-            <ClientItem client={client} onClick={() => {}} selected={state.selectedClient === client.id} />
+            <ClientItem client={client} onClick={() => onSelectClient(client.id)} selected={selectedClient === client.id} />
           ))}
         </div>
       </>}

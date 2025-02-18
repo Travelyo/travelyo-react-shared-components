@@ -17,3 +17,12 @@ export type Proposal = {
   updatedAt: string
   numberOfOffers: number
 }
+
+
+export type ProposalClientForm = {
+  genderType: string
+  firstName: string
+  lastName: string
+  phone: string
+  email: string
+}

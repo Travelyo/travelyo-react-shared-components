@@ -1,5 +1,5 @@
-import React from 'react'
-import { Proposal } from './ProposalTypes';
+import React, { memo } from 'react'
+import { Proposal, ProposalClientForm } from './ProposalTypes';
 import SelectProposal from './steps/SelectProposal';
 import SelectClient from './steps/SelectClient';
 import { useProposalContext } from './proposalContext';
@@ -10,16 +10,21 @@ type Props = {
   offerId: string,
 }
 
+const initialForm = { genderType: "", firstName: "", lastName: "", email: "", phone: "" }
+
 const Proposal = ({
   trigger,
   offerId,
 }: Props) => {
   const { state, dispatch } = useProposalContext()
   const { step } = state
-  console.log(state)
+  const [form, setForm] = React.useState<ProposalClientForm>(initialForm)
+  const [selectedClient, setSelectedClient] = React.useState<string | null>(null)
 
   const onOpenChange = () => {
     dispatch({ type: 'SET_STEP', payload: 'selectProposal' })
+    setSelectedClient(null)
+    setForm(initialForm)
   }
 
   return (
@@ -28,10 +33,17 @@ const Proposal = ({
       <DialogContent className="proposal-dialog">
         <DialogClose />
         {step === 'selectProposal' && <SelectProposal />}
-        {step === 'selectClient' && <SelectClient />}
+        {step === 'selectClient' && (
+          <SelectClient
+            form={form}
+            onChangeForm={setForm}
+            selectedClient={selectedClient}
+            onSelectClient={setSelectedClient}
+          />
+        )}
       </DialogContent>
     </Dialog>
   )
 }
 
-export default Proposal
+export default memo(Proposal)
