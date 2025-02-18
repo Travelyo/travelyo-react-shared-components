@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const baseUrl = process.env.NODE_ENV === 'development' ? 'http://web.qa-b2b.svc.cluster.local' : '';
+export const baseUrl = process.env.NODE_ENV === 'local' ? 'http://web.qa-b2b.svc.cluster.local' : '';
 
 export const getMuid = () => {
   const hf_user = localStorage.getItem('hf_user');
