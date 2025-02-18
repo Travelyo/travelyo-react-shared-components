@@ -4,7 +4,7 @@ export interface ProposalState {
     clients: any[];
     selectedClient: any | null;
     clientForm: {
-        title: string;
+        genderType: string;
         firstName: string;
         lastName: string;
         email: string;
