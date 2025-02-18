@@ -14,10 +14,16 @@ const Proposal = ({
   trigger,
   offerId,
 }: Props) => {
-  const { step, setStep } = useProposalContext()
+  const { state, dispatch } = useProposalContext()
+  const { step } = state
+  console.log(state)
+
+  const onOpenChange = () => {
+    dispatch({ type: 'SET_STEP', payload: 'selectProposal' })
+  }
 
   return (
-    <Dialog onOpenChange={() => setStep('selectProposal')}>
+    <Dialog onOpenChange={onOpenChange}>
       <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent className="proposal-dialog">
         <DialogClose />

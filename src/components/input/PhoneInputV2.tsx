@@ -1,16 +1,30 @@
-import React from 'react'
-import IntlTelInput from 'intl-tel-input/react'
+import React, { useEffect, useState } from 'react'
+import IntlTelInput from "intl-tel-input/reactWithUtils";
 
 type Props = {
-  initialCountry?: string
+  initialCountry?: string,
+  initialValue?: string,
+  onChange: (value: string, name: string) => void,
 }
 
 const PhoneInputV2 = ({
   initialCountry = "de",
+  initialValue,
+  onChange,
 }: Props) => {
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [number, setNumber] = useState<string>('')
+
+  useEffect(() => {
+    onChange(number, 'phone')
+  }, [number])
+
   return (
     <div className="voyage-phone-input">
       <IntlTelInput
+        onChangeNumber={setNumber}
+        onChangeValidity={setIsValid}
+        initialValue={initialValue}
         initOptions={{
           initialCountry,
           separateDialCode: true,

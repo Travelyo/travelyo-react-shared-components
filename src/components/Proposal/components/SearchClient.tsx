@@ -74,14 +74,13 @@ const SearchClient = ({
   search,
   setSearch
 }: Props) => {
-  const { clients } = useProposalContext()
+  const { state } = useProposalContext()
+  const { clients } = state
 
-  const filteredClients = clientsTemp.filter((item) =>
+  const filteredClients = clients.filter((item) =>
     [item.firstName, item.lastName, item.phone, item.email]
       .some((field) => field.toLowerCase().includes(search.toLowerCase()))
   );
-
-  console.log(filteredClients)
 
   return (
     <div>
@@ -99,7 +98,7 @@ const SearchClient = ({
         <div className="text-xl font-semibold mb-6 leading-none">Client</div>
         <div className="flex flex-col gap-3">
           {filteredClients.map(client => (
-            <ClientItem client={client} onClick={() => {}} selected={client.id === 2} />
+            <ClientItem client={client} onClick={() => {}} selected={state.selectedClient === client.id} />
           ))}
         </div>
       </>}
@@ -107,4 +106,4 @@ const SearchClient = ({
   )
 }
 
-export default SearchClient
+export default React.memo(SearchClient)

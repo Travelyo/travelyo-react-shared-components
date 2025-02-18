@@ -9,6 +9,7 @@ type ButtonProps = {
   className?: string,
   rounded?: boolean,
   inverted?: boolean,
+  disabled?: boolean,
 }
 
 const Button = ({
@@ -19,6 +20,7 @@ const Button = ({
   rounded,
   inverted,
   className,
+  disabled,
   ...props
 }: ButtonProps) => {
 
@@ -33,7 +35,7 @@ const Button = ({
   }
 
   return (
-    <button {...props} className={getClassNames()} onClick={onClick}>{label}</button>
+    <button {...props} className={getClassNames()} onClick={onClick} disabled={disabled}>{label}</button>
   )
 }
 

@@ -3,14 +3,18 @@ import React from 'react'
 import AddProposal from '../components/AddProposal'
 import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
-import { Proposal } from '../ProposalTypes'
 import { useProposalContext } from '../proposalContext'
 
 type Props = {}
 
 const SelectProposal = (props: Props) => {
   const { setIsOpen } = useDialog()
-  const { proposals, setStep } = useProposalContext()
+  const { state, dispatch } = useProposalContext()
+  const { proposals } = state
+
+  const onConfirmClick = () => {
+    dispatch({ type: 'SET_STEP', payload: 'selectClient' })
+  }
 
   return (
     <>
@@ -33,7 +37,7 @@ const SelectProposal = (props: Props) => {
         <Button
           label='Confirm'
           size="large"
-          onClick={() => setStep('selectClient')}
+          onClick={onConfirmClick}
           rounded
         />
       </div>
