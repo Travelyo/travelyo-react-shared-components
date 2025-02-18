@@ -5,7 +5,7 @@ export interface ProposalState {
   clients: any[];
   selectedClient: any | null;
   clientForm: {
-    title: string;
+    genderType: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -27,7 +27,7 @@ const initialState: ProposalState = {
   proposals: [],
   clients: [],
   selectedClient: null,
-  clientForm: { title: "", firstName: "", lastName: "", email: "", phone: "" },
+  clientForm: { genderType: "", firstName: "", lastName: "", email: "", phone: "" },
   isFormValid: false,
   step: "selectProposal",
 };
