@@ -7,7 +7,7 @@ type Props = {
   search: string,
   setSearch: (value: string) => void,
   selectedClient: string | null,
-  onSelectClient: (value: string) => void,
+  onSelectClient: (value: string | null) => void,
 }
 
 const SearchClient = ({
@@ -23,6 +23,14 @@ const SearchClient = ({
     [item.firstName, item.lastName, item.phone, item.email]
       .some((field) => field.toLowerCase().includes(search.toLowerCase()))
   );
+
+  const onClientClick = (id: string) => {
+    if (selectedClient === id) {
+      onSelectClient(null)
+    } else {
+      onSelectClient(id)
+    }
+  }
 
   return (
     <div>
@@ -40,7 +48,7 @@ const SearchClient = ({
         <div className="text-xl font-semibold mb-6 leading-none">Client</div>
         <div className="flex flex-col gap-3">
           {filteredClients.map(client => (
-            <ClientItem client={client} onClick={() => onSelectClient(client.id)} selected={selectedClient === client.id} />
+            <ClientItem client={client} onClick={() => onClientClick(client.id)} selected={selectedClient === client.id} />
           ))}
         </div>
       </>}

@@ -11,7 +11,7 @@ type Props = {
   form: ProposalClientForm,
   onChangeForm: (action: SetStateAction<{ genderType: string, firstName: string, lastName: string, phone: string, email: string }>) => void,
   selectedClient: string | null,
-  onSelectClient: (value: string) => void,
+  onSelectClient: (value: string | null) => void,
 }
 
 const SelectClient = ({
