@@ -3,6 +3,8 @@ import { ProposalState } from './proposalReducer';
 interface ProposalContextType {
     state: ProposalState;
     dispatch: React.Dispatch<any>;
+    fetchProposals: () => void;
+    fetchClients: () => void;
 }
 export declare const ProposalContext: React.Context<ProposalContextType | undefined>;
 export declare const ProposalProvider: ({ children }: {
