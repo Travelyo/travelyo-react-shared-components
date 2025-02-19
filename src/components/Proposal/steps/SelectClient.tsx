@@ -3,9 +3,9 @@ import AddClient from '../components/AddClient'
 import { useDialog } from '@/components/ui/dialog'
 import Button from '@/components/button'
 import SearchClient from '../components/SearchClient'
-import { useProposalContext } from '../proposalContext'
-import { baseUrl, getMuid } from '@/lib/utils'
 import { ProposalClientForm } from '../ProposalTypes'
+import { useCreateClient } from '../hooks/useCreateClient'
+import { baseUrl, getMuid } from '@/lib/utils'
 
 type Props = {
   form: ProposalClientForm,
@@ -22,35 +22,55 @@ const SelectClient = ({
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
-  const { fetchClients } = useProposalContext()
+  const { createClient } = useCreateClient()
 
   const handleNextClick = async () => {
     if (selectedClient) {
-      // do request to add offer to proposal
+      handleCreateProposal(selectedClient)
     }
 
     if (!selectedClient && form) {
       // create client
-      const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/client?muid=${getMuid()}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(form),
-      })
-      
-      if (response.ok) {
-        const user = await response.json()
-        fetchClients()
-        onSelectClient(user.id)
+      const client = await createClient(form)
+      if (client) {
+        handleCreateProposal(client.id)
       }
+    }
+  }
+
+  const handleCreateProposal = async (clientId: string) => {
+    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        clientId,
+      })
+    })
+  }
+
+  const handleAddOfferToProposal = async (proposalId: string, offerId: string) => {
+    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        proposalId,
+        offerId,
+      })
+    })
+    
+    if (response.ok) {
+      setIsOpen(false)
     }
   }
 
   const validateForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const { firstName, lastName, phone, email, genderType } = form
-    if (firstName === '' || lastName === '' || phone === '' || genderType === '') {
+    if (firstName === '' || lastName === '' || phone === '' || genderType === '' || email === '') {
       return false
     }
     if (email.length > 0 && !emailRegex.test(email)) {
