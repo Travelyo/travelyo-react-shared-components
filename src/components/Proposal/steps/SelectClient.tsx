@@ -22,28 +22,28 @@ const SelectClient = ({
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
-  const { state } = useProposalContext()
+  const { fetchClients } = useProposalContext()
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (selectedClient) {
       // do request to add offer to proposal
     }
 
     if (!selectedClient && form) {
       // create client
-      const request = fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/client?muid=${getMuid()}`, {
+      const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/client?muid=${getMuid()}`, {
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
         body: JSON.stringify(form),
-      }).then((response) => {
-        if (response.ok) {
-          return response.json()
-        }
-      }).then((data) => {
-        console.log(data)
       })
+      
+      if (response.ok) {
+        const user = await response.json()
+        fetchClients()
+        onSelectClient(user.id)
+      }
     }
   }
 
@@ -68,7 +68,7 @@ const SelectClient = ({
           selectedClient={selectedClient}
           onSelectClient={onSelectClient}
         />
-        {search.length === 0 && <AddClient form={form} onChangeForm={onChangeForm} />}
+        {(search.length === 0 && !selectedClient) && <AddClient form={form} onChangeForm={onChangeForm} />}
       </div>
 
       <div className="flex justify-between mt-auto">

@@ -6,6 +6,8 @@ import { baseUrl, getMuid } from '@/lib/utils';
 interface ProposalContextType {
   state: ProposalState;
   dispatch: React.Dispatch<any>;
+  fetchProposals: () => void;
+  fetchClients: () => void;
 }
 
 export const ProposalContext = createContext<ProposalContextType | undefined>(undefined);
@@ -31,7 +33,7 @@ export const ProposalProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   return (
-    <ProposalContext.Provider value={{ state, dispatch }}>
+    <ProposalContext.Provider value={{ state, dispatch, fetchProposals, fetchClients }}>
       {children}
     </ProposalContext.Provider>
   );
