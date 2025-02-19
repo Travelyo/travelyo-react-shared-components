@@ -10,7 +10,7 @@ type Props = {
         email: string;
     }>) => void;
     selectedClient: string | null;
-    onSelectClient: (value: string) => void;
+    onSelectClient: (value: string | null) => void;
 };
 declare const SelectClient: ({ form, onChangeForm, selectedClient, onSelectClient, }: Props) => React.JSX.Element;
 export default SelectClient;
