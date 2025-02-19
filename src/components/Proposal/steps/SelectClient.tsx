@@ -32,6 +32,9 @@ const SelectClient = ({
     if (!selectedClient && form) {
       // create client
       const request = fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/client?muid=${getMuid()}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
         method: 'POST',
         body: JSON.stringify(form),
       }).then((response) => {
