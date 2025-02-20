@@ -31,7 +31,7 @@ const SelectProposal = (props: Props) => {
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
-          <ProposalListItem data={proposal} onClick={onProposalClick} />
+          <ProposalListItem data={proposal} onClick={onProposalClick} active={state.selectedProposal === proposal.id} />
         ))}
       </div>
 
