@@ -97,6 +97,7 @@ const SelectClient = ({
       console.error('Error in proposal flow:', error);
     } finally {
       setIsLoading(false);
+      setIsOpen(false);
     }
   }
 
