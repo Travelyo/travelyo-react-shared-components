@@ -26,3 +26,10 @@ export type ProposalClientForm = {
   phone: string
   email: string
 }
+
+export type OfferData = {
+  offerId: string
+  searchContext: string
+  searchCapacity: string
+  searchDuration: string
+}

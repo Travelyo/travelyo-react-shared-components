@@ -3,7 +3,7 @@ import AddClient from '../components/AddClient'
 import { useDialog } from '@/components/ui/dialog'
 import Button from '@/components/button'
 import SearchClient from '../components/SearchClient'
-import { ProposalClientForm } from '../ProposalTypes'
+import { OfferData, ProposalClientForm } from '../ProposalTypes'
 import { useCreateClient } from '../hooks/useCreateClient'
 import { baseUrl, getMuid } from '@/lib/utils'
 
@@ -12,6 +12,7 @@ type Props = {
   onChangeForm: (action: SetStateAction<{ genderType: string, firstName: string, lastName: string, phone: string, email: string }>) => void,
   selectedClient: string | null,
   onSelectClient: (value: string | null) => void,
+  offerData: OfferData,
 }
 
 const SelectClient = ({
@@ -19,6 +20,7 @@ const SelectClient = ({
   onChangeForm,
   selectedClient,
   onSelectClient,
+  offerData,
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
@@ -46,6 +48,10 @@ const SelectClient = ({
       method: 'POST',
       body: JSON.stringify({
         clientId,
+        name: 'Test Proposal 1',
+        searchContext: offerData.searchContext,
+        searchCapacity: offerData.searchCapacity,
+        searchDuration: offerData.searchDuration,
       })
     })
   }
