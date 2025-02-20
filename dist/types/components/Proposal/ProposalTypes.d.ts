@@ -26,6 +26,7 @@ export type ProposalClientForm = {
 };
 export type OfferData = {
     offerId: string;
+    date: string;
     searchContext: string;
     searchCapacity: string;
     searchDuration: string;
