@@ -7,6 +7,7 @@ import { OfferData, ProposalClientForm } from '../ProposalTypes'
 import { useCreateClient } from '../hooks/useCreateClient'
 import { baseUrl, getMuid } from '@/lib/utils'
 import { useProposalContext } from '../proposalContext'
+import { handleAddOfferToProposal } from '../proposalService'
 
 type Props = {
   form: ProposalClientForm,
@@ -68,22 +69,6 @@ const SelectClient = ({
     } catch (error) {
       console.error('Failed to create proposal:', error);
       return null;
-    }
-  }
-
-  const handleAddOfferToProposal = async (proposalId: number, offerId: string): Promise<any> => {
-    try {
-      const response = await fetch(
-        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}`,
-        {
-          headers: { 'Content-Type': 'application/json' },
-          method: 'POST',
-          body: JSON.stringify({ proposalId, offerId }),
-        }
-      );
-      if (!response.ok) throw new Error('Failed to add offer');
-    } catch (error) {
-      console.error('Failed to add offer to proposal:', error);
     }
   }
 

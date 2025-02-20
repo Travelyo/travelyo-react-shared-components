@@ -33,7 +33,7 @@ const Proposal = ({
       <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent className="proposal-dialog">
         <DialogClose />
-        {step === 'selectProposal' && <SelectProposal />}
+        {step === 'selectProposal' && <SelectProposal offerId={offerData.offerId} />}
         {step === 'selectClient' && (
           <SelectClient
             form={form}

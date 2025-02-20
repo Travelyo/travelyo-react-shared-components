@@ -4,16 +4,23 @@ import AddProposal from '../components/AddProposal'
 import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
 import { useProposalContext } from '../proposalContext'
+import { handleAddOfferToProposal } from '../proposalService'
 
-type Props = {}
+type Props = {
+  offerId: string,
+}
 
-const SelectProposal = (props: Props) => {
+const SelectProposal = ({
+  offerId,
+}: Props) => {
   const { setIsOpen } = useDialog()
   const { state, dispatch } = useProposalContext()
   const { proposals } = state
 
-  const onConfirmClick = () => {
-    dispatch({ type: 'SET_STEP', payload: 'selectClient' })
+  const onConfirmClick = async () => {
+    if (!state.selectedProposal) return
+    await handleAddOfferToProposal(state.selectedProposal, offerId)
+    setIsOpen(false)
   }
 
   const onProposalClick = (id: number) => {
@@ -47,6 +54,7 @@ const SelectProposal = (props: Props) => {
           label='Confirm'
           size="large"
           onClick={onConfirmClick}
+          disabled={!state.selectedProposal}
           rounded
         />
       </div>
