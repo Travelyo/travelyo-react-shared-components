@@ -1,5 +1,5 @@
 import React, { SetStateAction } from 'react';
-import { ProposalClientForm } from '../ProposalTypes';
+import { OfferData, ProposalClientForm } from '../ProposalTypes';
 type Props = {
     form: ProposalClientForm;
     onChangeForm: (action: SetStateAction<{
@@ -11,6 +11,7 @@ type Props = {
     }>) => void;
     selectedClient: string | null;
     onSelectClient: (value: string | null) => void;
+    offerData: OfferData;
 };
-declare const SelectClient: ({ form, onChangeForm, selectedClient, onSelectClient, }: Props) => React.JSX.Element;
+declare const SelectClient: ({ form, onChangeForm, selectedClient, onSelectClient, offerData, }: Props) => React.JSX.Element;
 export default SelectClient;
