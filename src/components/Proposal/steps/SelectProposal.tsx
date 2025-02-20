@@ -8,6 +8,7 @@ import { handleAddOfferToProposal } from '../proposalService'
 
 type Props = {
   offerId: string,
+  date: string,
 }
 
 const SelectProposal = ({

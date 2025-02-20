@@ -30,14 +30,14 @@ const SelectClient = ({
   const { createClient } = useCreateClient()
   const { state, fetchProposals } = useProposalContext()
 
-  const createClientIfNeeded = async (): Promise<string | null> => {
+  const createClientIfNeeded = async (): Promise<ProposalClientForm & { id: string } | null> => {
     if (selectedClient) {
-      return selectedClient;
+      return state.clients.find((client) => client.id === selectedClient) || null;
     }
     if (form && validateForm()) {
       try {
         const client = await createClient(form);
-        return client?.id || null;
+        return client || null;
       } catch (error) {
         console.error('Failed to create client:', error);
         return null;
@@ -46,7 +46,11 @@ const SelectClient = ({
     return null;
   };
 
-  const handleCreateProposal = async (clientId: string): Promise<any> => {
+  const getProposalName = (client: ProposalClientForm, offer: OfferData) => {
+    return `${client.firstName} ${client.lastName}, ${offer.date}`;
+  }
+
+  const handleCreateProposal = async (client: ProposalClientForm & { id: string }): Promise<any> => {
     try {
       const response = await fetch(
         `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`,
@@ -54,8 +58,8 @@ const SelectClient = ({
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
           body: JSON.stringify({
-            clientId,
-            name: 'Test Proposal 1',
+            clientId: client.id,
+            name: getProposalName(client, offerData),
             searchContext: offerData.searchContext,
             searchCapacity: offerData.searchCapacity,
             searchDuration: offerData.searchDuration,
@@ -75,15 +79,15 @@ const SelectClient = ({
   const handleNextClick = async () => {
     setIsLoading(true);
     try {
-      const clientId = await createClientIfNeeded();
-      if (!clientId) {
-        console.error('No client ID available');
+      const client = await createClientIfNeeded();
+      if (!client) {
+        console.error('No client available');
         return;
       }
 
       let proposalId = state.selectedProposal;
       if (!proposalId) {
-        const proposal = await handleCreateProposal(clientId);
+        const proposal = await handleCreateProposal(client);
         if (!proposal) return;
         proposalId = proposal.id;
       }

@@ -16,7 +16,7 @@ const ProposalListItem = ({
   return (
     <div className={classNames('proposal-item', { 'active': active })}>
       <div className="font-semibold">{data.name}</div>
-      <button className="add-btn" onClick={() => onClick(data.id)}><i className={active ? 'ri-check-line' : 'ri-add-line'} /></button>
+      <button className="add-btn" onClick={() => onClick(data.id)}><i className={active ? 'ri-check-line text-white' : 'ri-add-line'} /></button>
     </div>
   )
 }
