@@ -1,4 +1,6 @@
 import React from 'react';
-type Props = {};
-declare const SelectProposal: (props: Props) => React.JSX.Element;
+type Props = {
+    offerId: string;
+};
+declare const SelectProposal: ({ offerId, }: Props) => React.JSX.Element;
 export default SelectProposal;
