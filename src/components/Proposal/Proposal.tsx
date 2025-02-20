@@ -23,6 +23,7 @@ const Proposal = ({
 
   const onOpenChange = () => {
     dispatch({ type: 'SET_STEP', payload: 'selectProposal' })
+    dispatch({ type: 'SET_SELECTED_PROPOSAL', payload: null })
     setSelectedClient(null)
     setForm(initialForm)
   }

@@ -6,6 +6,7 @@ import SearchClient from '../components/SearchClient'
 import { OfferData, ProposalClientForm } from '../ProposalTypes'
 import { useCreateClient } from '../hooks/useCreateClient'
 import { baseUrl, getMuid } from '@/lib/utils'
+import { useProposalContext } from '../proposalContext'
 
 type Props = {
   form: ProposalClientForm,
@@ -24,52 +25,89 @@ const SelectClient = ({
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
   const { createClient } = useCreateClient()
+  const { state, fetchProposals } = useProposalContext()
 
-  const handleNextClick = async () => {
+  const createClientIfNeeded = async (): Promise<string | null> => {
     if (selectedClient) {
-      handleCreateProposal(selectedClient)
+      return selectedClient;
     }
-
-    if (!selectedClient && form) {
-      // create client
-      const client = await createClient(form)
-      if (client) {
-        handleCreateProposal(client.id)
+    if (form && validateForm()) {
+      try {
+        const client = await createClient(form);
+        return client?.id || null;
+      } catch (error) {
+        console.error('Failed to create client:', error);
+        return null;
       }
     }
+    return null;
+  };
+
+  const handleCreateProposal = async (clientId: string): Promise<any> => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`,
+        {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: JSON.stringify({
+            clientId,
+            name: 'Test Proposal 1',
+            searchContext: offerData.searchContext,
+            searchCapacity: offerData.searchCapacity,
+            searchDuration: offerData.searchDuration,
+          }),
+        }
+      );
+      if (!response.ok) throw new Error('Proposal creation failed');
+      const proposal = await response.json();
+      await fetchProposals();
+      return proposal;
+    } catch (error) {
+      console.error('Failed to create proposal:', error);
+      return null;
+    }
   }
 
-  const handleCreateProposal = async (clientId: string) => {
-    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        clientId,
-        name: 'Test Proposal 1',
-        searchContext: offerData.searchContext,
-        searchCapacity: offerData.searchCapacity,
-        searchDuration: offerData.searchDuration,
-      })
-    })
+  const handleAddOfferToProposal = async (proposalId: number, offerId: string): Promise<any> => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}`,
+        {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: JSON.stringify({ proposalId, offerId }),
+        }
+      );
+      if (!response.ok) throw new Error('Failed to add offer');
+    } catch (error) {
+      console.error('Failed to add offer to proposal:', error);
+    }
   }
 
-  const handleAddOfferToProposal = async (proposalId: string, offerId: string) => {
-    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        proposalId,
-        offerId,
-      })
-    })
-    
-    if (response.ok) {
-      setIsOpen(false)
+  const handleNextClick = async () => {
+    setIsLoading(true);
+    try {
+      const clientId = await createClientIfNeeded();
+      if (!clientId) {
+        console.error('No client ID available');
+        return;
+      }
+
+      let proposalId = state.selectedProposal;
+      if (!proposalId) {
+        const proposal = await handleCreateProposal(clientId);
+        if (!proposal) return;
+        proposalId = proposal.id;
+      }
+
+      await handleAddOfferToProposal(proposalId, offerData.offerId);
+    } catch (error) {
+      console.error('Error in proposal flow:', error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -96,6 +134,8 @@ const SelectClient = ({
         />
         {(search.length === 0 && !selectedClient) && <AddClient form={form} onChangeForm={onChangeForm} />}
       </div>
+
+      {isLoading && <div className="text-center">Loading...</div>}
 
       <div className="flex justify-between mt-auto">
         <Button

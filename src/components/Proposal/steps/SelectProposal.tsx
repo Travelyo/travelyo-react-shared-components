@@ -16,13 +16,22 @@ const SelectProposal = (props: Props) => {
     dispatch({ type: 'SET_STEP', payload: 'selectClient' })
   }
 
+  const onProposalClick = (id: number) => {
+    if (state.selectedProposal === id) {
+      dispatch({ type: 'SET_SELECTED_PROPOSAL', payload: null })
+    }
+    else {
+      dispatch({ type: 'SET_SELECTED_PROPOSAL', payload: id })
+    }
+  }
+
   return (
     <>
       <div className="text-xl font-semibold mb-6">Add to proposal</div>
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
-          <ProposalListItem data={proposal} />
+          <ProposalListItem data={proposal} onClick={onProposalClick} />
         ))}
       </div>
 
