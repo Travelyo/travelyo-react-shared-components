@@ -3,6 +3,7 @@ export interface ProposalState {
     proposals: Proposal[];
     clients: any[];
     step: string;
+    selectedProposal?: number | null;
 }
 type Action = {
     type: "SET_PROPOSALS";
@@ -10,6 +11,9 @@ type Action = {
 } | {
     type: "SET_CLIENTS";
     payload: any[];
+} | {
+    type: "SET_SELECTED_PROPOSAL";
+    payload: number | null;
 } | {
     type: "SET_STEP";
     payload: string;
