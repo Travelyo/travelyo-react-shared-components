@@ -25,6 +25,10 @@ export const useCreateClient = () => {
       })
 
       if (!response.ok) {
+        if (response.status === 400) {
+          const errors = await response.json()
+          setError(errors)
+        }
         throw new Error('Failed to create client')
       }
 
