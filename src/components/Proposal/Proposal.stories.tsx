@@ -22,5 +22,12 @@ type Story = StoryObj<typeof Proposal>;
 export const Primary: Story = {
   args: {
     trigger: <button>click</button>,
+    offerData: {
+      date: "2022-01-01",
+      offerId: "1",
+      searchCapacity: '2-0',
+      searchContext: 'City trips',
+      searchDuration: '7',
+    }
   }
 }

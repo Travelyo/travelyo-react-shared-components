@@ -5,6 +5,7 @@ import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
 import { useProposalContext } from '../proposalContext'
 import { handleAddOfferToProposal } from '../proposalService'
+import { toast } from 'sonner'
 
 type Props = {
   offerId: string,
@@ -21,7 +22,16 @@ const SelectProposal = ({
   const onConfirmClick = async () => {
     if (!state.selectedProposal) return
     await handleAddOfferToProposal(state.selectedProposal, offerId)
+    const activeProposal = proposals.find((proposal) => proposal.id === state.selectedProposal)
     setIsOpen(false)
+    toast('Offer added to', {
+      className: 'voyage-toast',
+      description: activeProposal?.name,
+      duration: 5000,
+      icon: <i className="ri-check-line text-lg text-primary" />,
+      position: 'bottom-center',
+      cancel: <div className="voyage-toast-close cursor-pointer"onClick={() => toast.dismiss()}><i className="ri-close-line text-lg" /></div>
+    })
   }
 
   const onProposalClick = (id: number) => {

@@ -1,4 +1,5 @@
 import React, { SetStateAction, useState } from 'react'
+import { toast } from 'sonner'
 import AddClient from '../components/AddClient'
 import { useDialog } from '@/components/ui/dialog'
 import Button from '@/components/button'
@@ -26,7 +27,8 @@ const SelectClient = ({
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [proposalName, setProposalName] = useState('')
   const { createClient } = useCreateClient()
   const { state, fetchProposals } = useProposalContext()
 
@@ -52,6 +54,7 @@ const SelectClient = ({
 
   const handleCreateProposal = async (client: ProposalClientForm & { id: string }): Promise<any> => {
     try {
+      setProposalName(getProposalName(client, offerData))
       const response = await fetch(
         `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`,
         {
@@ -98,6 +101,14 @@ const SelectClient = ({
     } finally {
       setIsLoading(false);
       setIsOpen(false);
+      toast('Offer added to', {
+        className: 'voyage-toast',
+        description: proposalName,
+        duration: 5000,
+        icon: <i className="ri-check-line text-lg text-primary" />,
+        position: 'bottom-center',
+        cancel: <div className="voyage-toast-close cursor-pointer"onClick={() => toast.dismiss()}><i className="ri-close-line text-lg" /></div>
+      })
     }
   }
 
@@ -125,8 +136,6 @@ const SelectClient = ({
         {(search.length === 0 && !selectedClient) && <AddClient form={form} onChangeForm={onChangeForm} />}
       </div>
 
-      {isLoading && <div className="text-center">Loading...</div>}
-
       <div className="flex justify-between mt-auto">
         <Button
           label='Close'
@@ -136,12 +145,12 @@ const SelectClient = ({
           rounded
         />
         <Button
-          label='Next'
+          label={search.length === 0 || selectedClient ? 'Confirm' : 'Next'}
           variant="secondary"
           size="large"
           onClick={handleNextClick}
           rounded
-          disabled={!(validateForm() || selectedClient)}
+          disabled={!(validateForm() || selectedClient || isLoading)}
         />
       </div>
     </>
