@@ -4,7 +4,6 @@ import SelectProposal from './steps/SelectProposal';
 import SelectClient from './steps/SelectClient';
 import { useProposalContext } from './proposalContext';
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog';
-import { toast, Toaster } from 'sonner';
 
 type Props = {
   trigger: React.ReactElement,
@@ -47,7 +46,6 @@ const Proposal = ({
           )}
         </DialogContent>
       </Dialog>
-      <Toaster />
     </>
   )
 }
