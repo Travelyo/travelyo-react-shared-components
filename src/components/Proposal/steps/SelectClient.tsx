@@ -29,8 +29,8 @@ const SelectClient = ({
   const [search, setSearch] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const proposalName = useRef('')
-  const { createClient } = useCreateClient()
-  const { state, fetchProposals } = useProposalContext()
+  const { createClient, error } = useCreateClient()
+  const { state, fetchProposals, fetchClients } = useProposalContext()
 
   const createClientIfNeeded = async (): Promise<ProposalClientForm & { id: string } | null> => {
     if (selectedClient) {
@@ -39,6 +39,7 @@ const SelectClient = ({
     if (form && validateForm()) {
       try {
         const client = await createClient(form);
+        fetchClients()
         return client || null;
       } catch (error) {
         console.error('Failed to create client:', error);
@@ -133,7 +134,7 @@ const SelectClient = ({
           selectedClient={selectedClient}
           onSelectClient={onSelectClient}
         />
-        {(search.length === 0 && !selectedClient) && <AddClient form={form} onChangeForm={onChangeForm} />}
+        {(search.length === 0 && !selectedClient) && <AddClient form={form} onChangeForm={onChangeForm} errors={error} />}
       </div>
 
       <div className="flex justify-between mt-auto">

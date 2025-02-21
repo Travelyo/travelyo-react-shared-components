@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import IntlTelInput from "intl-tel-input/reactWithUtils";
+import { cn } from '@/lib/utils';
 
 type Props = {
   initialCountry?: string,
   initialValue?: string,
   onChange: (value: string, name: string) => void,
+  error: string,
 }
 
 const PhoneInputV2 = ({
   initialCountry = "de",
   initialValue,
   onChange,
+  error,
 }: Props) => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [number, setNumber] = useState<string>('')
@@ -20,7 +23,7 @@ const PhoneInputV2 = ({
   }, [number])
 
   return (
-    <div className="voyage-phone-input">
+    <div className={cn('voyage-phone-input', { 'voyage-phone-input--error': error })}>
       <IntlTelInput
         onChangeNumber={setNumber}
         onChangeValidity={setIsValid}
@@ -37,6 +40,7 @@ const PhoneInputV2 = ({
           placeholder: 'Phone number',
         }}
       />
+      {error && <div className="text-error-dark text-sm font-medium">{error}</div>}
     </div>
   )
 }

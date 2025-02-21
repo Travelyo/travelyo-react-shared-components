@@ -10,6 +10,7 @@ type InputProps = {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   readOnly?: boolean;
+  error?: string;
 }
 
 const Input = (props: InputProps) => {
@@ -20,12 +21,14 @@ const Input = (props: InputProps) => {
     startIcon,
     endIcon,
     readOnly,
+    error,
     ...restProps
   } = props;
 
   const inputClasses = ['voyage-input'];
   if (startIcon) inputClasses.push('voyage-input--padding-start');
   if (endIcon) inputClasses.push('voyage-input--padding-end');
+  if (error) inputClasses.push('voyage-input--error');
 
   return (
     <div className="voyage-input__group">
@@ -48,6 +51,7 @@ const Input = (props: InputProps) => {
           {endIcon && <span className="voyage-input__icon voyage-input__icon--end">{endIcon}</span>}
         </div>
       </label>
+      {error && <div className="voyage-input__error">{error}</div>}
     </div>
   )
 }

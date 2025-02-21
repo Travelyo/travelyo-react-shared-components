@@ -37,6 +37,11 @@
     padding-inline-end: 44px;
   }
 
+  &--error {
+    border: 1px solid #F3421B;
+    box-shadow: 0px 0px 0px 1px #F3421B;
+  }
+
   &__group {
     width: 100%;
 
@@ -93,6 +98,13 @@
         left: 16px;
       }
     }
+  }
+
+  &__error {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #F3421B;
+    font-weight: 500;
   }
 }
 
@@ -167,5 +179,12 @@
 
   .iti__country-list {
     max-height: 140px;
+  }
+  
+  &--error {
+    .iti__tel-input {
+      border: 1px solid #F3421B;
+      box-shadow: 0px 0px 0px 1px #F3421B;
+    }
   }
 }
