@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import AddClient from '../components/AddClient'
 import { useDialog } from '@/components/ui/dialog'
@@ -28,7 +28,7 @@ const SelectClient = ({
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [proposalName, setProposalName] = useState('')
+  const proposalName = useRef('')
   const { createClient } = useCreateClient()
   const { state, fetchProposals } = useProposalContext()
 
@@ -54,7 +54,7 @@ const SelectClient = ({
 
   const handleCreateProposal = async (client: ProposalClientForm & { id: string }): Promise<any> => {
     try {
-      setProposalName(getProposalName(client, offerData))
+      proposalName.current = getProposalName(client, offerData)
       const response = await fetch(
         `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`,
         {
@@ -96,19 +96,19 @@ const SelectClient = ({
       }
 
       await handleAddOfferToProposal(proposalId, offerData.offerId);
-    } catch (error) {
-      console.error('Error in proposal flow:', error);
-    } finally {
-      setIsLoading(false);
       setIsOpen(false);
       toast('Offer added to', {
         className: 'voyage-toast',
-        description: proposalName,
+        description: proposalName.current,
         duration: 5000,
         icon: <i className="ri-check-line text-lg text-primary" />,
         position: 'bottom-center',
         cancel: <div className="voyage-toast-close cursor-pointer"onClick={() => toast.dismiss()}><i className="ri-close-line text-lg" /></div>
       })
+    } catch (error) {
+      console.error('Error in proposal flow:', error);
+    } finally {
+      setIsLoading(false);
     }
   }
 

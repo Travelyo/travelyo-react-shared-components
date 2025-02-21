@@ -31,8 +31,8 @@ const AddClient = ({
             <Label htmlFor="mr">Mr</Label>
           </div>
           <div className="flex items-center gap-2">
-            <RadioGroupItem value="Mrs" id="mrs" />
-            <Label htmlFor="mrs">Mrs</Label>
+            <RadioGroupItem value="Miss" id="miss" />
+            <Label htmlFor="miss">Miss</Label>
           </div>
         </RadioGroup>
         <Input
