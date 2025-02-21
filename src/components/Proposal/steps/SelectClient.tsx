@@ -39,6 +39,8 @@ const SelectClient = ({
     if (form && validateForm()) {
       try {
         const client = await createClient(form);
+        debugger;
+        console.log(client)
         fetchClients()
         return client || null;
       } catch (error) {

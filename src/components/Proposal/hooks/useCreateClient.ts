@@ -9,7 +9,11 @@ export type CreateClientResponse = ProposalClientForm & {
 export const useCreateClient = () => {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const [data, setData] = useState<CreateClientResponse | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>({
+    "phone": "Phone with value +491231231 is not valid",
+    "firstName": "First name with value tyest12 is not valid",
+    "lastName": "Last name with value test123 is not valid"
+})
 
   const createClient = async (clientData: Record<string, any>) => {
     setStatus('pending')
