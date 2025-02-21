@@ -3,7 +3,7 @@ import { baseUrl, getMuid } from "@/lib/utils";
 export const handleAddOfferToProposal = async (proposalId: number, offerId: string): Promise<any> => {
   try {
     const response = await fetch(
-      `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}`,
+      `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal/${proposalId}/offer?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`,
       {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',

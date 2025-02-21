@@ -16,13 +16,13 @@ export const ProposalProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(proposalReducer, initialState);
 
   const fetchProposals = async () => {
-    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposals?muid=${getMuid()}`);
+    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposals?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`);
     const data = await response.json();
     dispatch({ type: "SET_PROPOSALS", payload: data });
   }
 
   const fetchClients = async () => {
-    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/clients?muid=${getMuid()}`);
+    const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/clients?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`);
     const data = await response.json();
     dispatch({ type: "SET_CLIENTS", payload: data });
   }

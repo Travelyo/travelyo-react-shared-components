@@ -56,7 +56,7 @@ const SelectClient = ({
     try {
       setProposalName(getProposalName(client, offerData))
       const response = await fetch(
-        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}`,
+        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`,
         {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
