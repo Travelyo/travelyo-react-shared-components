@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { baseUrl, getMuid } from '@/lib/utils'
 import { ProposalClientForm } from '../ProposalTypes'
 
@@ -10,6 +10,9 @@ export const useCreateClient = () => {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const [data, setData] = useState<CreateClientResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    console.log('logged error: ', error)
+  }, [error])
 
   const createClient = async (clientData: Record<string, any>) => {
     setStatus('pending')
@@ -28,13 +31,12 @@ export const useCreateClient = () => {
         const errors = await response.json()
         console.log('errors: ', errors);
         setError(errors)
-        throw new Error('Failed to create client')
+      } else {
+        const result = await response.json()
+        setData(result)
+        setStatus('success')
+        return result
       }
-
-      const result = await response.json()
-      setData(result)
-      setStatus('success')
-      return result
     } catch (err) {
       setError((err as Error).message)
       setStatus('error')
