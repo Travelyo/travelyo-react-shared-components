@@ -24,12 +24,10 @@ export const useCreateClient = () => {
         body: JSON.stringify(clientData),
       })
 
-      if (!response.ok) {
-        if (response.status === 400) {
-          const errors = await response.json()
-          console.log('errors: ', errors);
-          setError(errors)
-        }
+      if (response.status === 400) {
+        const errors = await response.json()
+        console.log('errors: ', errors);
+        setError(errors)
         throw new Error('Failed to create client')
       }
 
