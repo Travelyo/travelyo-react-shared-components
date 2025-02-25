@@ -18,6 +18,6 @@ declare const DialogOverlay: () => React.JSX.Element;
 declare const DialogContent: ({ children, className }: {
     children: React.ReactNode;
     className?: string;
-}) => React.JSX.Element | null;
+}) => React.JSX.Element;
 declare const DialogClose: () => React.JSX.Element;
 export { Dialog, DialogTrigger, DialogContent, DialogOverlay, DialogClose, };
