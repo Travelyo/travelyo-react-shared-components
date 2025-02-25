@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import cn from "classnames"
+import { CSSTransition } from "react-transition-group"
 
 type DialogProps = {
   children: React.ReactNode
@@ -80,17 +81,25 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, setIsOpen]);
 
-  if (!isOpen) return null;
-
   return (
     <DialogPortal>
-      <DialogOverlay />
-      <div
-        ref={dialogRef}
-        className={cn('voyage-dialog__content', className)}
+      <CSSTransition
+        in={isOpen}
+        timeout={300}
+        classNames="hf-modal-animate"
+        unmountOnExit
+        mountOnEnter
       >
-        {children}
-      </div>
+        <div>
+          <DialogOverlay />
+          <div
+            ref={dialogRef}
+            className={cn('voyage-dialog__content', className)}
+          >
+            {children}
+          </div>
+        </div>
+      </CSSTransition>
     </DialogPortal>
   );
 };

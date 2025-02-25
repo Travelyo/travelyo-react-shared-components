@@ -15,3 +15,38 @@
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+.hf-modal-animate-enter {
+  background: rgba(0, 0, 0, 0);
+
+  .modal-body {
+    transform: translateY(100vh);
+  }
+}
+
+.hf-modal-animate-enter-active {
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-body {
+    transform: translateY(0);
+    transition: transform 300ms;
+  }
+}
+
+.hf-modal-animate-exit {
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-body {
+    transform: translateY(0);
+    transition: transform 300ms;
+  }
+}
+
+.hf-modal-animate-exit-active {
+  background: rgba(0, 0, 0, 0);
+
+  .modal-body {
+    transform: translateY(100vh);
+  }
+}
+

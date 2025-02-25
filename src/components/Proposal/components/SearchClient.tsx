@@ -47,9 +47,10 @@ const SearchClient = ({
       {(search.length > 0 || selectedClient) && <>
         <div className="text-xl font-semibold mb-6 leading-none">Client</div>
         <div className="flex flex-col gap-3">
-          {filteredClients.map(client => (
+          {filteredClients.length > 0 && filteredClients.map(client => (
             <ClientItem client={client} onClick={() => onClientClick(client.id)} selected={selectedClient === client.id} />
           ))}
+          {filteredClients.length === 0 && <div className="p-5 bg-shark-50 text-sm text-shark-300 rounded-xl">No results</div>}
         </div>
       </>}
     </div>

@@ -440,10 +440,6 @@
   border-width: 1px
 }
 
-.border-2 {
-  border-width: 2px
-}
-
 .border-b {
   border-bottom-width: 1px
 }
@@ -472,9 +468,9 @@
   border-top-color: transparent
 }
 
-.bg-shark-25 {
+.bg-shark-50 {
   --tw-bg-opacity: 1;
-  background-color: rgb(247 247 247 / var(--tw-bg-opacity, 1))
+  background-color: rgb(246 246 246 / var(--tw-bg-opacity, 1))
 }
 
 .bg-transparent {
@@ -600,6 +596,11 @@
   letter-spacing: 0.1em
 }
 
+.text-shark-300 {
+  --tw-text-opacity: 1;
+  color: rgb(176 176 176 / var(--tw-text-opacity, 1))
+}
+
 .text-shark-400 {
   --tw-text-opacity: 1;
   color: rgb(136 136 136 / var(--tw-text-opacity, 1))
@@ -608,6 +609,11 @@
 .text-shark-900 {
   --tw-text-opacity: 1;
   color: rgb(61 61 61 / var(--tw-text-opacity, 1))
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1))
 }
 
 .underline-offset-4 {
