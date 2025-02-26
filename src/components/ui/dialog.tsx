@@ -96,7 +96,7 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
           <DialogOverlay>
             <div
               ref={dialogRef}
-              className={cn('voyage-dialog__content', className)}
+              className={cn('voyage-dialog__content modal-body', className)}
             >
               {children}
             </div>
