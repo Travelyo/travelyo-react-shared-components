@@ -14,7 +14,9 @@ export declare const useDialog: () => {
 };
 declare const Dialog: ({ children, className, onOpenChange, ...props }: DialogProps) => React.JSX.Element;
 declare const DialogTrigger: ({ as: Component, children, ...props }: DialogTriggerProps) => React.ReactElement<any, string | React.JSXElementConstructor<any>>;
-declare const DialogOverlay: () => React.JSX.Element;
+declare const DialogOverlay: ({ children }: {
+    children: React.ReactNode;
+}) => React.JSX.Element;
 declare const DialogContent: ({ children, className }: {
     children: React.ReactNode;
     className?: string;
