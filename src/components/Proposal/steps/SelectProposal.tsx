@@ -1,11 +1,11 @@
-import { useDialog } from '@/components/ui/dialog'
 import React from 'react'
+import { toast } from 'sonner'
+import { useDialog } from '@/components/ui/dialog'
 import AddProposal from '../components/AddProposal'
 import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
 import { useProposalContext } from '../proposalContext'
 import { handleAddOfferToProposal } from '../proposalService'
-import { toast } from 'sonner'
 
 type Props = {
   offerId: string,
@@ -49,7 +49,7 @@ const SelectProposal = ({
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
-          <ProposalListItem data={proposal} onClick={onProposalClick} active={state.selectedProposal === proposal.id} />
+          <ProposalListItem data={proposal} onClick={onProposalClick} active={state.selectedProposal === proposal.id || proposal.offerIds.includes(offerId)} />
         ))}
       </div>
 

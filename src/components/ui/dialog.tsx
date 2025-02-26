@@ -7,7 +7,7 @@ import useOnClickOutside from "@/hooks/useOnClickOutside"
 type DialogProps = {
   children: React.ReactNode
   className?: string
-  onOpenChange?: () => void
+  onOpenChange: () => void
 }
 
 interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
@@ -18,6 +18,7 @@ interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
 const DialogContext = createContext({
   isOpen: false,
   setIsOpen: (state: boolean) => {},
+  onOpenChange: () => {},
 })
 
 export const useDialog = () => {
@@ -36,7 +37,7 @@ const Dialog = ({ children, className, onOpenChange, ...props }: DialogProps) =>
   }, [isOpen])
 
   return (
-    <DialogContext.Provider value={{ isOpen, setIsOpen }}>
+    <DialogContext.Provider value={{ isOpen, setIsOpen, onOpenChange }}>
       <div className={cn("voyage-dialog", className)} {...props}>
         {children}
       </div>
@@ -68,7 +69,7 @@ const DialogOverlay = ({ children }: { children: React.ReactNode }) => {
 };
 
 const DialogContent = ({ children, className }: { children: React.ReactNode, className?: string }) => {
-  const { isOpen, setIsOpen } = useDialog();
+  const { isOpen, setIsOpen, onOpenChange } = useDialog();
   const dialogRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(dialogRef, () => setIsOpen(false));
 
@@ -89,6 +90,7 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
         in={isOpen}
         timeout={300}
         classNames="hf-modal-animate"
+        onExited={onOpenChange}
         unmountOnExit
         mountOnEnter
       >
