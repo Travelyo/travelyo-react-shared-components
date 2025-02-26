@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext, useEffect, useRef } from "r
 import { createPortal } from "react-dom"
 import cn from "classnames"
 import { CSSTransition } from "react-transition-group"
+import useOnClickOutside from "@/hooks/useOnClickOutside"
 
 type DialogProps = {
   children: React.ReactNode
@@ -55,20 +56,21 @@ const DialogPortal = ({ children }: { children: React.ReactNode }) => {
   return createPortal(children, document.body);
 };
 
-const DialogOverlay = () => {
-  const { setIsOpen } = useDialog();
+const DialogOverlay = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div
       className="voyage-dialog__overlay animate-fade-in"
-      onClick={() => setIsOpen(false)}
-    />
+    >
+      {children}
+    </div>
   );
 };
 
 const DialogContent = ({ children, className }: { children: React.ReactNode, className?: string }) => {
   const { isOpen, setIsOpen } = useDialog();
   const dialogRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(dialogRef, () => setIsOpen(false));
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -91,13 +93,14 @@ const DialogContent = ({ children, className }: { children: React.ReactNode, cla
         mountOnEnter
       >
         <div>
-          <DialogOverlay />
-          <div
-            ref={dialogRef}
-            className={cn('voyage-dialog__content', className)}
-          >
-            {children}
-          </div>
+          <DialogOverlay>
+            <div
+              ref={dialogRef}
+              className={cn('voyage-dialog__content', className)}
+            >
+              {children}
+            </div>
+          </DialogOverlay>
         </div>
       </CSSTransition>
     </DialogPortal>
