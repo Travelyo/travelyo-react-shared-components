@@ -150,7 +150,7 @@ const SelectClient = ({
           label={
             <span>
               {search.length === 0 || selectedClient ? t('common.proposals.confirm') : t('common.proposals.next')}
-              <i className="ri-arrow-right-line ms-2" />
+              <i className={`${document.documentElement.lang === 'he' ? 'ri-arrow-left-line' : 'ri-arrow-right-line'} ms-2`} />
             </span>
           }
           variant="secondary"
