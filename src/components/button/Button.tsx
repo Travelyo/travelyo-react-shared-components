@@ -1,7 +1,7 @@
 import React from 'react'
 
 type ButtonProps = {
-  label: string
+  label: string | React.ReactNode
   onClick?: () => void
   variant?: 'primary' | 'secondary' | 'secondary-negative' | 'naked' | 'secondary-alt' | 'link'
   size?: 'small' | 'medium' | 'large' | 'huge',
@@ -10,6 +10,7 @@ type ButtonProps = {
   rounded?: boolean,
   inverted?: boolean,
   disabled?: boolean,
+  isLoading?: boolean,
 }
 
 const Button = ({
@@ -21,6 +22,7 @@ const Button = ({
   inverted,
   className,
   disabled,
+  isLoading,
   ...props
 }: ButtonProps) => {
 
@@ -35,7 +37,10 @@ const Button = ({
   }
 
   return (
-    <button {...props} className={getClassNames()} onClick={onClick} disabled={disabled}>{label}</button>
+    <button {...props} className={getClassNames()} onClick={onClick} disabled={disabled || isLoading}>
+      {isLoading && <i className="ri-loader-4-line animate-spin me-2 inline-flex" />}
+      {label}
+    </button>
   )
 }
 

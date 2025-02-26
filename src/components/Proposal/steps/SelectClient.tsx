@@ -146,12 +146,18 @@ const SelectClient = ({
           rounded
         />
         <Button
-          label={search.length === 0 || selectedClient ? 'Confirm' : 'Next'}
+          label={
+            <span>
+              {search.length === 0 || selectedClient ? 'Confirm' : 'Next'}
+              <i className="ri-arrow-right-line ms-2" />
+            </span>
+          }
           variant="secondary"
           size="large"
           onClick={handleNextClick}
           rounded
           disabled={!(validateForm() || selectedClient || isLoading)}
+          isLoading={isLoading}
         />
       </div>
     </>
