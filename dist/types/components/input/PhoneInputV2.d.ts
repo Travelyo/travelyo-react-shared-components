@@ -4,6 +4,7 @@ type Props = {
     initialValue?: string;
     onChange: (value: string, name: string) => void;
     error: string;
+    placeholder?: string;
 };
-declare const PhoneInputV2: ({ initialCountry, initialValue, onChange, error, }: Props) => React.JSX.Element;
+declare const PhoneInputV2: ({ initialCountry, initialValue, onChange, error, placeholder, }: Props) => React.JSX.Element;
 export default PhoneInputV2;
