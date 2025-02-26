@@ -1,1 +1,2 @@
-export declare const handleAddOfferToProposal: (proposalId: number, offerId: string) => Promise<any>;
+import { OfferData } from "./ProposalTypes";
+export declare const handleAddOfferToProposal: (proposalId: number, offerData: OfferData) => Promise<any>;
