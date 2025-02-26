@@ -2,7 +2,7 @@ import React from "react";
 type DialogProps = {
     children: React.ReactNode;
     className?: string;
-    onOpenChange?: () => void;
+    onOpenChange: () => void;
 };
 interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
     as?: React.ElementType;
@@ -11,6 +11,7 @@ interface DialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
 export declare const useDialog: () => {
     isOpen: boolean;
     setIsOpen: (state: boolean) => void;
+    onOpenChange: () => void;
 };
 declare const Dialog: ({ children, className, onOpenChange, ...props }: DialogProps) => React.JSX.Element;
 declare const DialogTrigger: ({ as: Component, children, ...props }: DialogTriggerProps) => React.ReactElement<any, string | React.JSXElementConstructor<any>>;

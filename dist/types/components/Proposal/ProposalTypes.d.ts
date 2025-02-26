@@ -13,9 +13,15 @@ export type Proposal = {
         phone?: string;
         email?: string;
     };
+    offerIds: string[];
     createdAt: string;
     updatedAt: string;
     numberOfOffers: number;
+    search: {
+        capacity: string;
+        context: string | null;
+        duration: string;
+    };
 };
 export type ProposalClientForm = {
     genderType: string;
