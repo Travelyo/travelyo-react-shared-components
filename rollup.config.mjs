@@ -8,7 +8,6 @@ import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-fr
 import alias from '@rollup/plugin-alias';
 import path from 'path';
 
-const packageJson = require('./package.json');
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default [

@@ -7,6 +7,7 @@ type Props = {
   initialValue?: string,
   onChange: (value: string, name: string) => void,
   error: string,
+  placeholder?: string,
 }
 
 const PhoneInputV2 = ({
@@ -14,6 +15,7 @@ const PhoneInputV2 = ({
   initialValue,
   onChange,
   error,
+  placeholder = 'Phone number',
 }: Props) => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [number, setNumber] = useState<string>('')
@@ -37,7 +39,7 @@ const PhoneInputV2 = ({
         }}
         inputProps={{
           className: 'voyage-phone-input',
-          placeholder: 'Phone number',
+          placeholder,
         }}
       />
       {error && <div className="text-error-dark text-sm font-medium">{error}</div>}
