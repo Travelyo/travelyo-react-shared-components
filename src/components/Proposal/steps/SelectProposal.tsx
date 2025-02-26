@@ -6,6 +6,7 @@ import ProposalListItem from '../components/ProposalListItem'
 import Button from '@/components/button'
 import { useProposalContext } from '../proposalContext'
 import { handleAddOfferToProposal } from '../proposalService'
+import t from '@/services/translatorService'
 
 type Props = {
   offerId: string,
@@ -45,7 +46,7 @@ const SelectProposal = ({
 
   return (
     <>
-      <div className="text-xl font-semibold mb-6">Add to proposal</div>
+      <div className="text-xl font-semibold mb-6">{t('common.proposals.modalTitle')}</div>
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
@@ -55,14 +56,14 @@ const SelectProposal = ({
 
       <div className="flex justify-between mt-auto">
         <Button
-          label='Close'
+          label={t('common.proposals.cancel')}
           variant="secondary"
           size="large"
           onClick={() => setIsOpen(false)}
           rounded
         />
         <Button
-          label='Confirm'
+          label={t('common.proposals.confirm')}
           size="large"
           onClick={onConfirmClick}
           disabled={!state.selectedProposal}

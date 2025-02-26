@@ -9,6 +9,7 @@ import { useCreateClient } from '../hooks/useCreateClient'
 import { baseUrl, getMuid } from '@/lib/utils'
 import { useProposalContext } from '../proposalContext'
 import { handleAddOfferToProposal } from '../proposalService'
+import t from '@/services/translatorService'
 
 type Props = {
   form: ProposalClientForm,
@@ -98,7 +99,7 @@ const SelectClient = ({
 
       await handleAddOfferToProposal(proposalId, offerData);
       setIsOpen(false);
-      toast('Offer added to', {
+      toast(t('common.proposals.addOfferSuccessNotification'), {
         className: 'voyage-toast',
         description: proposalName.current,
         duration: 5000,
@@ -139,7 +140,7 @@ const SelectClient = ({
 
       <div className="flex justify-between mt-auto">
         <Button
-          label='Close'
+          label={t('common.proposals.close')}
           variant="secondary"
           size="large"
           onClick={() => setIsOpen(false)}
@@ -148,7 +149,7 @@ const SelectClient = ({
         <Button
           label={
             <span>
-              {search.length === 0 || selectedClient ? 'Confirm' : 'Next'}
+              {search.length === 0 || selectedClient ? t('common.proposals.confirm') : t('common.proposals.next')}
               <i className="ri-arrow-right-line ms-2" />
             </span>
           }
