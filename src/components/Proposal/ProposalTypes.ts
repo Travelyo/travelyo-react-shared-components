@@ -39,4 +39,12 @@ export type OfferData = {
   searchContext: string
   searchCapacity: string
   searchDuration: string
+  airports: string[]
+  originalPrice: number
+  capacity: {
+    adult: number
+    child: number
+    infant?: number | null
+    room?: number
+  }
 }

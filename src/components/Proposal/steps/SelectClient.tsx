@@ -57,7 +57,7 @@ const SelectClient = ({
     try {
       proposalName.current = getProposalName(client, offerData)
       const response = await fetch(
-        `${baseUrl}/api/v-6/v6-feat-b2b/b2b/proposal?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`,
+        `${baseUrl}${window.apiV6Config.path}/b2b/proposal?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`,
         {
           headers: { 'Content-Type': 'application/json' },
           method: 'POST',
@@ -96,7 +96,7 @@ const SelectClient = ({
         proposalId = proposal.id;
       }
 
-      await handleAddOfferToProposal(proposalId, offerData.offerId);
+      await handleAddOfferToProposal(proposalId, offerData);
       setIsOpen(false);
       toast('Offer added to', {
         className: 'voyage-toast',

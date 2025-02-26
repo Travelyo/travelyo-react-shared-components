@@ -16,7 +16,7 @@ export const useCreateClient = () => {
     setError(null)
 
     try {
-      const response = await fetch(`${baseUrl}/api/v-6/v6-feat-b2b/b2b/client?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`, {
+      const response = await fetch(`${baseUrl}${window.apiV6Config.path}/b2b/client?muid=${getMuid()}&locale=${window.dataGlobalSettings?.locale || 'en'}`, {
         headers: {
           'Content-Type': 'application/json',
         },
