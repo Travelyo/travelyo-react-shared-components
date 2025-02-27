@@ -99,7 +99,7 @@ const SelectClient = ({
 
       await handleAddOfferToProposal(proposalId, offerData);
       setIsOpen(false);
-      toast(t('common.proposals.addOfferSuccessNotification'), {
+      toast(t('proposals.addOfferSuccessNotification'), {
         className: 'voyage-toast',
         description: proposalName.current,
         duration: 5000,
@@ -140,7 +140,7 @@ const SelectClient = ({
 
       <div className="flex justify-between mt-auto">
         <Button
-          label={t('common.proposals.close')}
+          label={t('proposals.close')}
           variant="secondary"
           size="large"
           onClick={() => setIsOpen(false)}
@@ -149,7 +149,7 @@ const SelectClient = ({
         <Button
           label={
             <span>
-              {search.length === 0 || selectedClient ? t('common.proposals.confirm') : t('common.proposals.next')}
+              {search.length === 0 || selectedClient ? t('proposals.confirm') : t('proposals.next')}
               <i className={`${document.documentElement.lang === 'he' ? 'ri-arrow-left-line' : 'ri-arrow-right-line'} ms-2`} />
             </span>
           }

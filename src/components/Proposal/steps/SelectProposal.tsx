@@ -46,7 +46,7 @@ const SelectProposal = ({
 
   return (
     <>
-      <div className="text-xl font-semibold mb-6">{t('common.proposals.modalTitle')}</div>
+      <div className="text-xl font-semibold mb-6">{t('proposals.modalTitle')}</div>
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
@@ -56,14 +56,14 @@ const SelectProposal = ({
 
       <div className="flex justify-between mt-auto">
         <Button
-          label={t('common.proposals.cancel')}
+          label={t('proposals.cancel')}
           variant="secondary"
           size="large"
           onClick={() => setIsOpen(false)}
           rounded
         />
         <Button
-          label={t('common.proposals.confirm')}
+          label={t('proposals.confirm')}
           size="large"
           onClick={onConfirmClick}
           disabled={!state.selectedProposal}

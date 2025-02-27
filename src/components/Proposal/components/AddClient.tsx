@@ -32,31 +32,31 @@ const AddClient = ({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="text-xl font-semibold">{t('common.proposals.newClient')}</div>
+      <div className="text-xl font-semibold">{t('proposals.newClient')}</div>
       <form className="flex flex-col gap-6 mb-20">
         <div>
           <RadioGroup name="genderType" className='flex flex-row gap-4' defaultValue={form.genderType} onValueChange={(value) => handleChange(value, 'genderType')}>
             <div className="flex items-center gap-2">
               <RadioGroupItem value="Mr" id="mr" />
-              <Label htmlFor="mr">{t('common.proposals.addClient.mr')}</Label>
+              <Label htmlFor="mr">{t('proposals.addClient.mr')}</Label>
             </div>
             <div className="flex items-center gap-2">
               <RadioGroupItem value="Miss" id="miss" />
-              <Label htmlFor="miss">{t('common.proposals.addClient.miss')}</Label>
+              <Label htmlFor="miss">{t('proposals.addClient.miss')}</Label>
             </div>
           </RadioGroup>
           {errors?.genderType && <div className="text-error-dark text-sm">{errors.genderType}</div>}
         </div>
         <Input
           startIcon={<i className="ri-user-3-line" />}
-          placeholder={t('common.proposals.addClient.firstName')}
+          placeholder={t('proposals.addClient.firstName')}
           onChange={(e) => handleChange(e.target.value, 'firstName')}
           value={form.firstName}
           error={errors?.firstName}
         />
         <Input
           startIcon={<i className="ri-user-3-line" />}
-          placeholder={t('common.proposals.addClient.lastName')}
+          placeholder={t('proposals.addClient.lastName')}
           onChange={(e) => handleChange(e.target.value, 'lastName')}
           value={form.lastName}
           error={errors?.lastName}
@@ -65,11 +65,11 @@ const AddClient = ({
           initialValue={form.phone}
           onChange={handleChange}
           error={errors?.phone}
-          placeholder={t('common.proposals.addClient.phone')}
+          placeholder={t('proposals.addClient.phone')}
         />
         <Input
           startIcon={<i className="ri-mail-send-line" />}
-          placeholder={t('common.proposals.addClient.email')}
+          placeholder={t('proposals.addClient.email')}
           type='email'
           onChange={(e) => handleChange(e.target.value, 'email')}
           value={form.email}
