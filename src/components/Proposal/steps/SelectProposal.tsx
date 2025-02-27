@@ -7,14 +7,15 @@ import Button from '@/components/button'
 import { useProposalContext } from '../proposalContext'
 import { handleAddOfferToProposal } from '../proposalService'
 import t from '@/services/translatorService'
+import { OfferData } from '../ProposalTypes'
 
 type Props = {
-  offerId: string,
+  offerData: OfferData,
   date: string,
 }
 
 const SelectProposal = ({
-  offerId,
+  offerData,
 }: Props) => {
   const { setIsOpen } = useDialog()
   const { state, dispatch } = useProposalContext()
@@ -22,7 +23,7 @@ const SelectProposal = ({
 
   const onConfirmClick = async () => {
     if (!state.selectedProposal) return
-    await handleAddOfferToProposal(state.selectedProposal, offerId)
+    await handleAddOfferToProposal(state.selectedProposal, offerData)
     const activeProposal = proposals.find((proposal) => proposal.id === state.selectedProposal)
     setIsOpen(false)
     toast('Offer added to', {
@@ -50,7 +51,7 @@ const SelectProposal = ({
       <div className="flex flex-col gap-2 mb-7 overflow-y-auto">
         <AddProposal />
         {proposals.map((proposal) => (
-          <ProposalListItem data={proposal} onClick={onProposalClick} active={state.selectedProposal === proposal.id || proposal.offerIds.includes(offerId)} />
+          <ProposalListItem data={proposal} onClick={onProposalClick} active={state.selectedProposal === proposal.id || proposal.offerIds.includes(offerData.offerId)} />
         ))}
       </div>
 

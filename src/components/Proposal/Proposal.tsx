@@ -34,7 +34,7 @@ const Proposal = ({
         <DialogTrigger>{trigger}</DialogTrigger>
         <DialogContent className="proposal-dialog">
           <DialogClose />
-          {step === 'selectProposal' && <SelectProposal date={offerData.date} offerId={offerData.offerId} />}
+          {step === 'selectProposal' && <SelectProposal date={offerData.date} offerData={offerData} />}
           {step === 'selectClient' && (
             <SelectClient
               form={form}
