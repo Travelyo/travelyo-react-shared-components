@@ -57,7 +57,7 @@ const SelectProposal = ({
 
       <div className="flex justify-between mt-auto">
         <Button
-          label={t('proposals.cancel')}
+          label={t('proposals.close')}
           variant="secondary"
           size="large"
           onClick={() => setIsOpen(false)}
