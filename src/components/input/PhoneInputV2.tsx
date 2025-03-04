@@ -36,6 +36,7 @@ const PhoneInputV2 = ({
           countrySearch: false,
           fixDropdownWidth: false,
           countryOrder: ['DE', 'AT', 'CH', 'LU', 'CZ'],
+          useFullscreenPopup: false,
         }}
         inputProps={{
           className: 'voyage-phone-input',
