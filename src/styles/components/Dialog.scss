@@ -1,0 +1,52 @@
+.animate-fade-in {
+  animation: fade-in 150ms ease;
+}
+
+.animate-slide-in {
+  animation: slide-in 150ms ease;
+}
+
+@keyframes slide-in {
+  0% { transform: translateY(-10%); }
+  100% { transform: translateY(0%); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.hf-modal-animate-enter {
+  background: rgba(0, 0, 0, 0);
+
+  .modal-body {
+    transform: translateY(100vh);
+  }
+}
+
+.hf-modal-animate-enter-active {
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-body {
+    transform: translateY(0);
+    transition: transform 300ms;
+  }
+}
+
+.hf-modal-animate-exit {
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-body {
+    transform: translateY(0);
+    transition: transform 300ms;
+  }
+}
+
+.hf-modal-animate-exit-active {
+  background: rgba(0, 0, 0, 0);
+
+  .modal-body {
+    transform: translateY(100vh);
+  }
+}
+

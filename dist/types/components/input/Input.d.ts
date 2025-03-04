@@ -9,6 +9,7 @@ type InputProps = {
     startIcon?: React.ReactNode;
     endIcon?: React.ReactNode;
     readOnly?: boolean;
+    error?: string;
 };
 declare const Input: (props: InputProps) => React.JSX.Element;
 export default Input;

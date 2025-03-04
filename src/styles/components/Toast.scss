@@ -1,0 +1,36 @@
+.voyage-toast[data-sonner-toast][data-sonner-toast] {
+  background: #262626;
+  color: white;
+  border-color: #262626;
+  padding: 20px;
+  gap: 12px;
+  border-radius: 16px;
+
+  [data-icon] {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    border-radius: 9999px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #262626;
+    margin: 0;
+  }
+
+  [data-title] {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  [data-description] {
+    color: white;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .voyage-toast-close {
+    margin-inline-start: auto;
+  }
+}

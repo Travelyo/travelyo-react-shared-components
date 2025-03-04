@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 import 'remixicon/fonts/remixicon.css';
 import '../src/styles/index.scss';
+import "../src/tailwind-output.css";
 
 const preview: Preview = {
   parameters: {

@@ -1,4 +1,3 @@
-/// <reference types="google.maps" />
 import React from 'react';
 import { PoiProps } from './Map';
 interface MarkerProps {
