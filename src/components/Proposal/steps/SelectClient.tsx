@@ -99,7 +99,7 @@ const SelectClient = ({
 
       await handleAddOfferToProposal(proposalId, offerData);
       setIsOpen(false);
-      toast(t('addOfferSuccessNotification'), {
+      toast(t('proposals.addOfferSuccessNotification'), {
         className: 'voyage-toast',
         description: proposalName.current,
         duration: 5000,
