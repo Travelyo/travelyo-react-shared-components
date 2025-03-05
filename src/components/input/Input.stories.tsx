@@ -40,3 +40,13 @@ export const WithIcons: Story = {
     endIcon: <i className="ri-calendar-line" />,
   },
 }
+
+export const WithError: Story = {
+  args: {
+    placeholder: "Pick date",
+    label: "Date",
+    startIcon: <i className="ri-calendar-line" />,
+    endIcon: <i className="ri-calendar-line" />,
+    error: "Invalid date",
+  },
+}
