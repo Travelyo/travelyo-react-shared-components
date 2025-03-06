@@ -17,6 +17,7 @@ type Props = {
   selectedClient: string | null,
   onSelectClient: (value: string | null) => void,
   offerData: OfferData,
+  source: 'list' | 'offer',
 }
 
 const SelectClient = ({
@@ -25,6 +26,7 @@ const SelectClient = ({
   selectedClient,
   onSelectClient,
   offerData,
+  source,
 }: Props) => {
   const { setIsOpen } = useDialog()
   const [search, setSearch] = useState('')
@@ -85,6 +87,7 @@ const SelectClient = ({
     setIsLoading(true);
     try {
       const client = await createClientIfNeeded();
+      let proposal = null;
       if (!client) {
         console.error('No client available');
         return;
@@ -92,12 +95,12 @@ const SelectClient = ({
 
       let proposalId = state.selectedProposal;
       if (!proposalId) {
-        const proposal = await handleCreateProposal(client);
+        proposal = await handleCreateProposal(client);
         if (!proposal) return;
         proposalId = proposal.id;
       }
 
-      await handleAddOfferToProposal(proposalId, offerData);
+      await handleAddOfferToProposal(proposalId, offerData, source, proposal);
       setIsOpen(false);
       toast(t('proposals.addOfferSuccessNotification'), {
         className: 'voyage-toast',

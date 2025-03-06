@@ -12,10 +12,12 @@ import { OfferData } from '../ProposalTypes'
 type Props = {
   offerData: OfferData,
   date: string,
+  source: 'list' | 'offer',
 }
 
 const SelectProposal = ({
   offerData,
+  source,
 }: Props) => {
   const { setIsOpen } = useDialog()
   const { state, dispatch } = useProposalContext()
@@ -23,8 +25,8 @@ const SelectProposal = ({
 
   const onConfirmClick = async () => {
     if (!state.selectedProposal) return
-    await handleAddOfferToProposal(state.selectedProposal, offerData)
     const activeProposal = proposals.find((proposal) => proposal.id === state.selectedProposal)
+    await handleAddOfferToProposal(state.selectedProposal, offerData, source, activeProposal)
     setIsOpen(false)
     toast('Offer added to', {
       className: 'voyage-toast',

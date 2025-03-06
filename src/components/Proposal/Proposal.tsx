@@ -8,7 +8,7 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog'
 type Props = {
   trigger: React.ReactElement,
   offerData: OfferData,
-  source?: 'list' | 'offer'
+  source: 'list' | 'offer'
 }
 
 const initialForm = { genderType: "", firstName: "", lastName: "", email: "", phone: "" }
@@ -28,6 +28,15 @@ const Proposal = ({
     dispatch({ type: 'SET_SELECTED_PROPOSAL', payload: null })
     setSelectedClient(null)
     setForm(initialForm)
+    document.dispatchEvent(new CustomEvent('travelyo:hf', {
+      detail: {
+        name: 'Results card add to proposal clicked',
+        data: {
+          offerData,
+          source,
+        }
+      }
+    }));
   }
 
   return (
@@ -36,7 +45,7 @@ const Proposal = ({
         <DialogTrigger>{trigger}</DialogTrigger>
         <DialogContent className="proposal-dialog">
           <DialogClose />
-          {step === 'selectProposal' && <SelectProposal date={offerData.date} offerData={offerData} />}
+          {step === 'selectProposal' && <SelectProposal date={offerData.date} offerData={offerData} source={source} />}
           {step === 'selectClient' && (
             <SelectClient
               form={form}
@@ -44,6 +53,7 @@ const Proposal = ({
               selectedClient={selectedClient}
               onSelectClient={setSelectedClient}
               offerData={offerData}
+              source={source}
             />
           )}
         </DialogContent>

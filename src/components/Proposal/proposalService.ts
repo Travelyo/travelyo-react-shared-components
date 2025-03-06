@@ -1,7 +1,7 @@
 import { baseUrl, getMuid } from "@/lib/utils";
-import { OfferData } from "./ProposalTypes";
+import { OfferData, Proposal } from "./ProposalTypes";
 
-export const handleAddOfferToProposal = async (proposalId: number, offerData: OfferData): Promise<any> => {
+export const handleAddOfferToProposal = async (proposalId: number, offerData: OfferData, source: 'list' | 'offer', proposal: Proposal): Promise<any> => {
   try {
     const { offerId, airports, originalPrice, capacity } = offerData;
     const body = JSON.stringify({
@@ -20,6 +20,18 @@ export const handleAddOfferToProposal = async (proposalId: number, offerData: Of
       }
     );
     if (!response.ok) throw new Error('Failed to add offer');
+
+    document.dispatchEvent(new CustomEvent('travelyo:hf', {
+      detail: {
+        name: 'Result card added to proposal',
+        data: {
+          offerData,
+          source,
+          proposal,
+        }
+      }
+    }));
+
   } catch (error) {
     console.error('Failed to add offer to proposal:', error);
   }
