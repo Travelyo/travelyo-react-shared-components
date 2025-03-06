@@ -8,6 +8,7 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from '../ui/dialog'
 type Props = {
   trigger: React.ReactElement,
   offerData: OfferData,
+  source?: 'list' | 'offer'
 }
 
 const initialForm = { genderType: "", firstName: "", lastName: "", email: "", phone: "" }
@@ -15,13 +16,14 @@ const initialForm = { genderType: "", firstName: "", lastName: "", email: "", ph
 const Proposal = ({
   trigger,
   offerData,
+  source,
 }: Props) => {
   const { state, dispatch } = useProposalContext()
   const { step } = state
   const [form, setForm] = React.useState<ProposalClientForm>(initialForm)
   const [selectedClient, setSelectedClient] = React.useState<string | null>(null)
 
-  const onOpenChange = () => {
+  const onOpen = () => {
     dispatch({ type: 'SET_STEP', payload: 'selectProposal' })
     dispatch({ type: 'SET_SELECTED_PROPOSAL', payload: null })
     setSelectedClient(null)
@@ -30,7 +32,7 @@ const Proposal = ({
 
   return (
     <>
-      <Dialog onOpenChange={onOpenChange}>
+      <Dialog onOpen={onOpen}>
         <DialogTrigger>{trigger}</DialogTrigger>
         <DialogContent className="proposal-dialog">
           <DialogClose />
