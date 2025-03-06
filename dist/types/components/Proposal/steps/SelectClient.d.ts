@@ -12,6 +12,7 @@ type Props = {
     selectedClient: string | null;
     onSelectClient: (value: string | null) => void;
     offerData: OfferData;
+    source: 'list' | 'offer';
 };
-declare const SelectClient: ({ form, onChangeForm, selectedClient, onSelectClient, offerData, }: Props) => React.JSX.Element;
+declare const SelectClient: ({ form, onChangeForm, selectedClient, onSelectClient, offerData, source, }: Props) => React.JSX.Element;
 export default SelectClient;

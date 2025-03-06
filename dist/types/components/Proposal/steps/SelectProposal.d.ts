@@ -3,6 +3,7 @@ import { OfferData } from '../ProposalTypes';
 type Props = {
     offerData: OfferData;
     date: string;
+    source: 'list' | 'offer';
 };
-declare const SelectProposal: ({ offerData, }: Props) => React.JSX.Element;
+declare const SelectProposal: ({ offerData, source, }: Props) => React.JSX.Element;
 export default SelectProposal;
